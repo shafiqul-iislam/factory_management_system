@@ -40,13 +40,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
 Route::middleware(['auth:sanctum'])
-->prefix('users')
-->group(function () {
-    Route::get('/', [UserController::class, 'index'])->name('users.all');
-    Route::post('/add', [UserController::class, 'add'])->name('users.add');
-    Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-    Route::get('/view/{id}', [UserController::class, 'view'])->name('users.view');
-    Route::post('/update', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
-    Route::post('/server-side-users', [UserController::class, 'serverSideAllUsers'])->name('users.server-side-users');
-});
+    ->prefix('users')
+    ->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('users.all');
+        Route::post('/add', [UserController::class, 'add'])->name('users.add');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+        Route::get('/view/{id}', [UserController::class, 'view'])->name('users.view');
+        Route::post('/update', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
+        Route::post('/server-side-users', [UserController::class, 'serverSideAllUsers'])->name('users.server-side-users');
+    });

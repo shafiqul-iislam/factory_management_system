@@ -18,10 +18,12 @@
                 <thead>
                     <tr class="text-start fs-6">
                         <th class="font-weight-bolder" style="min-width: 20px;">ID</th>
-                        <th class="font-weight-bolder" style="min-width: 150px;">Name</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Email</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Username</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Role</th>
+                        <th class="font-weight-bolder" style="min-width: 150px;">Profile Type</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Phone</th>
-                        <th class="font-weight-bolder" style="min-width: 150px;">Role</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Email</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Status</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Created By</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Created At</th>
                         <th class="font-weight-bolder text-end" style="min-width: 100px;">Actions</th>
