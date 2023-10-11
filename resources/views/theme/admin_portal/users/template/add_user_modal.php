@@ -16,8 +16,8 @@
                                 <label class="form-label fs-7">Role</label>
                                 <select class="form-control form-control-md" name="role">
                                     <option>Select An Option</option>
-                                    <option value="1">Super Admin</option>
-                                    <option value="2">Admin</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Staff</option>
                                 </select>
                             </div>
                         </div>

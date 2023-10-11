@@ -5,28 +5,25 @@
 
 <div class="card shadow-sm">
     <div class="card-header border-bottom d-flex align-items-center justify-content-between">
-        <h4 class="card-title">Users</h4>
+        <h4 class="card-title">Departments</h4>
         <div class="card-toolbar">
-            <button type="button" class="btn btn-primary btn-md me-3 fs-6" data-bs-toggle="modal" data-bs-target=".add_users_modal">
-                Add User
+            <button type="button" class="btn btn-primary btn-md me-3 fs-6" data-bs-toggle="modal" data-bs-target=".add_department_modal">
+                Add Department/Section
             </button>
         </div>
     </div>
     <div class="card-body py-4">
         <div class="table-responsive">
-            <table class="table align-items-center mb-0" id="dt_users">
+            <table class="table align-items-center mb-0" id="dt_departments">
                 <thead>
                     <tr class="text-start fs-6">
-                        <th class="font-weight-bolder" style="min-width: 20px;">ID</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Username</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Role</th>
-                        <th class="font-weight-bolder" style="min-width: 150px;">Profile Type</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Phone</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Email</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Status</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Created By</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Created At</th>
-                        <th class="font-weight-bolder text-end" style="min-width: 100px;">Actions</th>
+                        <th class="font-weight-bolder" style="min-width: 40px;">ID</th>
+                        <th class="font-weight-bolder" style="min-width: 200px;">Name</th>
+                        <th class="font-weight-bolder" style="min-width: 200px;">Description</th>
+                        <th class="font-weight-bolder" style="min-width: 200px;">Status</th>
+                        <th class="font-weight-bolder" style="min-width: 200px;">Created By</th>
+                        <th class="font-weight-bolder" style="min-width: 200px;">Created</th>
+                        <th class="font-weight-bolder text-end" style="min-width: 200px;">Actions</th>
                     </tr>
                 </thead>
             </table>
@@ -37,13 +34,13 @@
 </div>
 
 <?php include(resource_path('/views/theme/admin_portal/dashboard/footer.php')) ?>
-<?php include(resource_path('/views/theme/admin_portal/users/template/add_user_modal.php')) ?>
+<?php include(resource_path('/views/theme/admin_portal/departments/template/add_department_modal.php')) ?>
 
 <script>
     $(document).ready(function() {
-        var url = "<?php echo url('users/server-side-users'); ?>";
+        var url = "<?php echo url('departments/server-side-data'); ?>";
 
-        var table = $('#dt_users').DataTable({
+        var table = $('#dt_departments').DataTable({
             serverSide: true,
             processing: true,
             orderable: false,
