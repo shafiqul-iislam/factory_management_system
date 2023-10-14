@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminPortal\Department;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Models\Department\Department;
 use Illuminate\Support\Facades\Validator;
@@ -45,47 +46,40 @@ class DepartmentController extends Controller
         }
     }
 
-
-    public function view($id)
-    {
-        $viewDepartment = Department::with(['userData'])->find($id);
-
-        return view('theme.departments.view', ['viewDepartment' => $viewDepartment]);
-    }
-
-
     public function edit($id)
     {
-        $editDepartment = Department::find($id);
-
-        return view('theme.departments.edit', ['editDepartment' => $editDepartment]);
+        $editDepartment = Department::findOrFail($id);
+        return view('theme.admin_portal.departments.edit', ['editDepartment' => $editDepartment]);
     }
-
 
     public function update(Request $request)
     {
-        $validator = $request->validate([
-            'department_name' => 'required',
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', Rule::unique('departments')->ignore($request->id)],
             'description' => 'required',
         ]);
 
-        $updateDepartment = Department::find($request->id);
-        $updateDepartment->name = $request->name;
-        $updateDepartment->description = $request->description;
-        $updateDepartment->status = ($request->status == 'on') ? 1 : 0;
-        $response = $updateDepartment->save();
-
-        if ($response) {
-            return redirect('/departments')->with('success', 'Successfuly Updated');
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            return redirect()->back()->with('error', $error);
         } else {
-            return redirect('/departments')->with('error', 'Oops Something Wrong');
+            $updateDepartment = Department::findOrFail($request->id);
+            $updateDepartment->name = $request->name;
+            $updateDepartment->description = $request->description;
+            $updateDepartment->status = ($request->status == 'on') ? 1 : 0;
+            $response = $updateDepartment->save();
+
+            if ($response) {
+                return redirect('/departments')->with('success', 'Successfuly Updated');
+            } else {
+                return redirect('/departments')->with('error', 'Oops Something Wrong');
+            }
         }
     }
 
-
     public function delete($id)
     {
-        $deleteDepartment = Department::find($id)->delete();
+        $deleteDepartment = Department::findOrFail($id)->delete();
 
         if ($deleteDepartment) {
             return redirect('/departments')->with('success', 'Successfuly Deleted');
@@ -136,13 +130,12 @@ class DepartmentController extends Controller
                 } else {
                     $td[] = '<span class="text-danger fw-bolder">Deactive</span>';
                 }
-
+                // created by id
                 if ($department->userData) {
                     $td[] = $department->userData->name;
                 } else {
                     $td[] = '';
                 }
-
                 $td[] =  date('Y-m-d', strtotime($department->created_at));
                 $td[] = $actions;
                 $rows[] = $td;

@@ -1,4 +1,7 @@
-<?php include(resource_path('/views/theme/dashboard/header.php')) ?>
+<?php include(resource_path('/views/theme/admin_portal/dashboard/header.php')) ?>
+
+<?php include(resource_path('/views/theme/admin_portal/global/success_alert.php')) ?>
+<?php include(resource_path('/views/theme/admin_portal//global/error_alert.php')) ?>
 
 <form action="<?php echo url('departments/update'); ?>" method="POST">
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
@@ -21,7 +24,7 @@
             <div class="row d-flex justify-content-center mb-3">
                 <div class="col-lg-6">
                     <label class="required form-label">Department Name</label>
-                    <input type="text" name="department_name" class="form-control form-control-solid p-2" placeholder="Enter Department Name" value="<?php echo $editDepartment->department_name; ?>">
+                    <input type="text" name="name" class="form-control form-control-solid p-2" placeholder="Enter Department Name" value="<?php echo $editDepartment->name; ?>">
                 </div>
             </div>
 
@@ -40,7 +43,7 @@
 
 </form>
 
-<?php include(resource_path('/views/theme/dashboard/footer.php')) ?>
+<?php include(resource_path('/views/theme/admin_portal/dashboard/footer.php')) ?>
 
 <script>
     $(document).ready(function() {
