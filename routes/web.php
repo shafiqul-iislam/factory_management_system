@@ -65,6 +65,7 @@ Route::middleware(['auth:sanctum'])
         Route::post('/server-side-data', [DepartmentController::class, 'serverSideAllDepartments'])->name('server-side-data');
     });
 
+    
 Route::middleware(['auth:sanctum'])
     ->prefix('employees')
     ->name('employees.')
@@ -74,5 +75,5 @@ Route::middleware(['auth:sanctum'])
         Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->name('edit');
         Route::post('/update', [EmployeeController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [EmployeeController::class, 'delete'])->name('delete');
-        Route::post('/server-side-data', [EmployeeController::class, 'serverSideAllDepartments'])->name('server-side-data');
+        Route::post('/server-side-data', [EmployeeController::class, 'serverSideAllEmployees'])->name('server-side-data');
     });

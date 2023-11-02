@@ -89,7 +89,7 @@ class DepartmentController extends Controller
     }
 
     // department dataTables fetch by ajax
-    public function serverSideAlldepartments(Request $request)
+    public function serverSideAllDepartments(Request $request)
     {
         $columns = array(
             0 => 'id',
