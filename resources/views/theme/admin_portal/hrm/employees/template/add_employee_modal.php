@@ -1,4 +1,4 @@
-<form action="<?php echo url('users/add'); ?>" method="post">
+<form enctype="multipart/form-data" method="POST" action="<?php echo url('employees/add'); ?>">
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
 
     <div class="modal fade add_employee_modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -12,37 +12,9 @@
                 <div class="modal-body px-6">
                     <div class="row mb-4">
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label fs-7">Role</label>
-                                <select class="form-control form-control-md" name="role">
-                                    <option>Select An Option</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Staff</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label fs-7">Profile Type</label>
-                                <select class="form-control form-control-md" name="profile_type">
-                                    <option>Select An Option</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Staff</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label fs-7">Name</label>
-                                <input type="text" name="name" class="form-control" placeholder="Enter Name">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label fs-7">Username</label>
-                                <input type="text" name="username" class="form-control" placeholder="Enter Username">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="status" checked="">
+                                <label class="form-check-label fw-bold fs-7" for="flexSwitchCheckDefault">Status</label>
                             </div>
                         </div>
                     </div>
@@ -50,8 +22,44 @@
                     <div class="row mb-4">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label fs-7">Phone</label>
-                                <input type="text" name="phone" class="form-control" placeholder="Enter Phone">
+                                <label class="form-label fs-7 required">Department</label>
+                                <select class="form-control form-control-md" name="department_id" required>
+                                    <option>Select An Option</option>
+                                    <option value="1">Finishing</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label fs-7 required">Designation</label>
+                                <select class="form-control form-control-md" name="designation" required>
+                                    <option>Select An Option</option>
+                                    <option value="1">Manager</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label fs-7 required">Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label fs-7 required">Username</label>
+                                <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label fs-7 required">Phone</label>
+                                <input type="text" name="phone" class="form-control" placeholder="Enter Phone" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -65,8 +73,13 @@
                     <div class="row mb-4">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label fs-7">Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Enter Password">
+                                <label class="form-label fs-7">Gender</label>
+                                <select class="form-control form-control-md" name="gender">
+                                    <option>Select An Option</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Others</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -76,11 +89,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+
+                    <div class="row mb-4">
                         <div class="col-lg-6">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="profile_status" checked="">
-                                <label class="form-check-label fw-bold fs-7" for="flexSwitchCheckDefault">Status</label>
+                            <div class="form-group">
+                                <label class="form-label fs-7 required">Joining Date</label>
+                                <input type="date" name="joining_date" class="form-control" placeholder="Enter Joining Date" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label fs-7">Office Shift</label>
+                                <select class="form-control form-control-md" name="office_shift">
+                                    <option>Select An Option</option>
+                                    <option value="1">Day</option>
+                                    <option value="2">Night</option>
+                                </select>
                             </div>
                         </div>
                     </div>

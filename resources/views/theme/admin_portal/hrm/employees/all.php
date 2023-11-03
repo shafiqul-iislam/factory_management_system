@@ -25,6 +25,7 @@
                         <th class="font-weight-bolder" style="min-width: 200px;">Department</th>
                         <th class="font-weight-bolder" style="min-width: 200px;">Office Shift</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Status</th>
+                        <th class="font-weight-bolder" style="min-width: 150px;">Joining Date</th>
                         <th class="font-weight-bolder" style="min-width: 150px;">Created By</th>
                         <th class="font-weight-bolder text-end" style="min-width: 150px;">Actions</th>
                     </tr>

@@ -2,15 +2,124 @@
 
 namespace App\Http\Controllers\AdminPortal\HRM;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\HRM\Employee;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
     public function index()
     {
         return view('theme.admin_portal.hrm.employees.all');
+    }
+
+
+    public function add(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|unique:employees',
+            'name' => 'required',
+            'phone' => 'required|unique:employees',
+            'department_id' => 'required',
+            'designation' => 'required',
+            'joining_date' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            return redirect()->back()->with('error', $error);
+        } else {
+
+            $addEmployee = new Employee;
+            $addEmployee->department_id = $request->department_id;
+            $addEmployee->designation = $request->designation;
+            $addEmployee->name = $request->name;
+            $addEmployee->username = $request->username;
+            $addEmployee->phone = $request->phone;
+            $addEmployee->email = $request->email;
+            $addEmployee->gender = $request->gender;
+            $addEmployee->address = $request->address;
+            $addEmployee->joining_date = $request->joining_date;
+            $addEmployee->office_shift = $request->office_shift;
+            $addEmployee->status = ($request->status == 'on') ? 1 : 0;
+
+            $loginUserData = auth()->user();
+            $addEmployee->created_by_id = $loginUserData->id;
+            $addEmployee->created_by_username = $loginUserData->name;
+            $response = $addEmployee->save();
+
+            if ($response) {
+                return redirect('/employees')->with('success', 'Successfuly Added');
+            } else {
+                return redirect('/employees')->with('error', 'Oops Something Wrong');
+            }
+        }
+    }
+
+
+    public function edit($id)
+    {
+        $editEmployee = Employee::findOrFail($id);
+        return view('theme.admin_portal.hrm.employees.edit', ['editEmployee' => $editEmployee]);
+    }
+
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'username' => ['required', Rule::unique('employees')->ignore($request->id)],
+            'phone' => ['required', Rule::unique('employees')->ignore($request->id)],
+            'name' => 'required',
+            'department_id' => 'required',
+            'designation' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            return redirect()->back()->with('error', $error);
+        } else {
+            $updateEmployee = Employee::findOrFail($request->id);
+            $updateEmployee->department_id = $request->department_id;
+            $updateEmployee->designation = $request->designation;
+            $updateEmployee->name = $request->name;
+            $updateEmployee->username = $request->username;
+            $updateEmployee->phone = $request->phone;
+            $updateEmployee->email = $request->email;
+            $updateEmployee->gender = $request->gender;
+            $updateEmployee->dob = $request->date_of_birth;
+            $updateEmployee->address = $request->address;
+            $updateEmployee->country = $request->country;
+            $updateEmployee->joining_date = $request->joining_date;
+            $updateEmployee->office_shift = $request->office_shift;
+            $updateEmployee->status = ($request->status == 'on') ? 1 : 0;
+            $response = $updateEmployee->save();
+
+            if ($response) {
+                return redirect('/employees')->with('success', 'Successfuly Added');
+            } else {
+                return redirect('/employees')->with('error', 'Oops Something Wrong');
+            }
+
+            if ($response) {
+                return redirect('/departments')->with('success', 'Successfuly Updated');
+            } else {
+                return redirect('/departments')->with('error', 'Oops Something Wrong');
+            }
+        }
+    }
+
+
+    public function delete($id)
+    {
+        $deleteEmployee = Employee::findOrFail($id)->delete();
+
+        if ($deleteEmployee) {
+            return redirect('/employees')->with('success', 'Successfuly Deleted');
+        } else {
+            return redirect('/employees')->with('error', 'Oops Something Wrong');
+        }
     }
 
 
@@ -50,7 +159,7 @@ class EmployeeController extends Controller
                 $td[] = $employee->id;
                 $td[] = $employee->name;
                 $td[] = $employee->phone;
-                
+
                 if ($employee->gender == 1) {
                     $td[] = 'Male';
                 } else if ($employee->gender == 2) {
@@ -61,20 +170,21 @@ class EmployeeController extends Controller
 
                 $td[] = $employee->designation;
                 $td[] = $employee->department_id;
-                $td[] = $employee->office_shift;               
+                $td[] = $employee->office_shift;
 
                 if ($employee->status == 1) {
                     $td[] = '<span class="text-success fw-bolder">Active</span>';
                 } else {
                     $td[] = '<span class="text-danger fw-bolder">Deactive</span>';
                 }
-                // created by id
+                $td[] =  date('Y-m-d', strtotime($employee->joining_date));
+
+                // created by
                 if ($employee->userData) {
                     $td[] = $employee->userData->name;
                 } else {
                     $td[] = '';
                 }
-                $td[] =  date('Y-m-d', strtotime($employee->created_at));
                 $td[] = $actions;
                 $rows[] = $td;
             }
