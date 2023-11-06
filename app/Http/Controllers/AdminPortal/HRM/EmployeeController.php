@@ -88,11 +88,12 @@ class EmployeeController extends Controller
             $updateEmployee->phone = $request->phone;
             $updateEmployee->email = $request->email;
             $updateEmployee->gender = $request->gender;
-            $updateEmployee->dob = $request->date_of_birth;
+            $updateEmployee->dob = $request->dob;
             $updateEmployee->address = $request->address;
             $updateEmployee->country = $request->country;
             $updateEmployee->joining_date = $request->joining_date;
             $updateEmployee->office_shift = $request->office_shift;
+            $updateEmployee->country = $request->country;
             $updateEmployee->status = ($request->status == 'on') ? 1 : 0;
             $response = $updateEmployee->save();
 
