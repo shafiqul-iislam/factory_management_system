@@ -27,8 +27,21 @@
                     <div class="form-group">
                         <label class="form-label fs-7 required">Department</label>
                         <select class="form-control form-control-md" name="department_id" required>
+                            <?php if (isset($editEmployee->departmentData)) { ?>
+                                <option selected value="<?php echo $editEmployee->departmentData->id; ?>"><?php echo $editEmployee->departmentData->name; ?> (*) </option>
+                            <?php } else { ?>
+                                <option selected>N/A (*)</option>
+                            <?php } ?>
+
                             <option>Select An Option</option>
-                            <option value="1">Finishing</option>
+                            <?php if (isset($departments) && !empty($departments)) { ?>
+                                <?php foreach ($departments as $department) { ?>
+
+                                    <option value="<?php echo $department->id ?>">
+                                        <?php echo $department->name ?>
+                                    </option>
+                                <?php } ?>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>
@@ -36,8 +49,21 @@
                     <div class="form-group">
                         <label class="form-label fs-7 required">Designation</label>
                         <select class="form-control form-control-md" name="designation" required>
+                            <?php if (isset($editEmployee->designationData)) { ?>
+                                <option selected value="<?php echo $editEmployee->designationData->id; ?>"><?php echo $editEmployee->designationData->name; ?> (*) </option>
+                            <?php } else { ?>
+                                <option selected>N/A (*)</option>
+                            <?php } ?>
+
                             <option>Select An Option</option>
-                            <option value="1">Manager</option>
+                            <?php if (isset($designations) && !empty($designations)) { ?>
+                                <?php foreach ($designations as $designation) { ?>
+
+                                    <option value="<?php echo $designation->id ?>">
+                                        <?php echo $designation->name ?>
+                                    </option>
+                                <?php } ?>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>

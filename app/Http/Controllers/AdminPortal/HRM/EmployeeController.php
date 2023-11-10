@@ -6,13 +6,18 @@ use App\Models\HRM\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Models\Department\Department;
+use App\Models\HRM\Designation;
 use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
     public function index()
     {
-        return view('theme.admin_portal.hrm.employees.all');
+        $data['departments'] = Department::select('id', 'name')->get();
+        $data['designations'] = Designation::select('id', 'name')->get();
+
+        return view('theme.admin_portal.hrm.employees.all', $data);
     }
 
 
@@ -61,8 +66,11 @@ class EmployeeController extends Controller
 
     public function edit($id)
     {
-        $editEmployee = Employee::findOrFail($id);
-        return view('theme.admin_portal.hrm.employees.edit', ['editEmployee' => $editEmployee]);
+        $data['editEmployee'] = Employee::findOrFail($id);
+        $data['departments'] = Department::select('id', 'name')->get();
+        $data['designations'] = Designation::select('id', 'name')->get();
+
+        return view('theme.admin_portal.hrm.employees.edit', $data);
     }
 
 
@@ -101,12 +109,6 @@ class EmployeeController extends Controller
                 return redirect('/employees')->with('success', 'Successfuly Added');
             } else {
                 return redirect('/employees')->with('error', 'Oops Something Wrong');
-            }
-
-            if ($response) {
-                return redirect('/departments')->with('success', 'Successfuly Updated');
-            } else {
-                return redirect('/departments')->with('error', 'Oops Something Wrong');
             }
         }
     }

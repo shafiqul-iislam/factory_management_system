@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPortal\UserController;
 use App\Http\Controllers\AdminPortal\Department\DepartmentController;
+use App\Http\Controllers\AdminPortal\HRM\DesignationController;
 use App\Http\Controllers\AdminPortal\HRM\EmployeeController;
+use App\Models\Designation;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,4 +78,17 @@ Route::middleware(['auth:sanctum'])
         Route::post('/update', [EmployeeController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [EmployeeController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [EmployeeController::class, 'serverSideAllEmployees'])->name('server-side-data');
+    });
+
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('designations')
+    ->name('designations.')
+    ->group(function () {
+        Route::get('/', [DesignationController::class, 'index'])->name('all');
+        Route::post('/add', [DesignationController::class, 'add'])->name('add');
+        Route::get('/edit/{id}', [DesignationController::class, 'edit'])->name('edit');
+        Route::post('/update', [DesignationController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [DesignationController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [DesignationController::class, 'serverSideAllDesignations'])->name('server-side-data');
     });

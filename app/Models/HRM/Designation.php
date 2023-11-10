@@ -2,20 +2,14 @@
 
 namespace App\Models\HRM;
 
-use App\Models\User;
-use App\Models\HRM\Designation;
 use App\Models\Department\Department;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Employee extends Model
+class Designation extends Model
 {
     use HasFactory;
-
-    public function designationData()
-    {
-        return $this->belongsTo(Designation::class, 'designation');
-    }
 
     public function departmentData()
     {
