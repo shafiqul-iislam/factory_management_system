@@ -142,12 +142,18 @@
                             <?php if ($editEmployee->office_shift == 1) { ?>
                                 <option value="1">Day (*)</option>
                             <?php } else if ($editEmployee->office_shift == 2) { ?>
-                                <option value="2">Night</option>
+                                <option value="2">Afternoon (*)</option>
+                            <?php } else if ($editEmployee->office_shift == 3) { ?>
+                                <option value="3">Night (*)</option>
+                            <?php } else if ($editEmployee->office_shift == 4) { ?>
+                                <option value="4">Others (*)</option>
                             <?php } ?>
 
                             <option value="">Select An Option</option>
                             <option value="1">Day</option>
-                            <option value="2">Night</option>
+                            <option value="2">Afternoon</option>
+                            <option value="3">Night</option>
+                            <option value="4">Others</option>
                         </select>
                     </div>
                 </div>

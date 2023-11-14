@@ -13,7 +13,6 @@ class DesignationController extends Controller
     public function index()
     {
         $data['departments'] = Department::select('id', 'name')->get();
-
         return view('theme.admin_portal.hrm.designations.all', $data);
     }
 

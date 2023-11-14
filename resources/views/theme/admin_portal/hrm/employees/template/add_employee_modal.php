@@ -117,7 +117,9 @@
                                 <select class="form-control form-control-md" name="office_shift">
                                     <option>Select An Option</option>
                                     <option value="1">Day</option>
-                                    <option value="2">Night</option>
+                                    <option value="2">Afternoon</option>
+                                    <option value="3">Night</option>
+                                    <option value="4">Others</option>
                                 </select>
                             </div>
                         </div>

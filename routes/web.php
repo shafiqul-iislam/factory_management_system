@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\Designation;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPortal\UserController;
-use App\Http\Controllers\AdminPortal\Department\DepartmentController;
-use App\Http\Controllers\AdminPortal\HRM\DesignationController;
 use App\Http\Controllers\AdminPortal\HRM\EmployeeController;
-use App\Models\Designation;
+use App\Http\Controllers\AdminPortal\HRM\AttendanceController;
+use App\Http\Controllers\AdminPortal\HRM\DesignationController;
+use App\Http\Controllers\AdminPortal\Department\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,4 +92,17 @@ Route::middleware(['auth:sanctum'])
         Route::post('/update', [DesignationController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [DesignationController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [DesignationController::class, 'serverSideAllDesignations'])->name('server-side-data');
+    });
+
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('attendances')
+    ->name('attendances.')
+    ->group(function () {
+        Route::get('/', [AttendanceController::class, 'index'])->name('all');
+        Route::post('/add', [AttendanceController::class, 'add'])->name('add');
+        Route::get('/edit/{id}', [AttendanceController::class, 'edit'])->name('edit');
+        Route::post('/update', [AttendanceController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [AttendanceController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [AttendanceController::class, 'serverSideAllDesignations'])->name('server-side-data');
     });
