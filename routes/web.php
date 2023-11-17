@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminPortal\HRM\EmployeeController;
 use App\Http\Controllers\AdminPortal\HRM\AttendanceController;
 use App\Http\Controllers\AdminPortal\HRM\DesignationController;
 use App\Http\Controllers\AdminPortal\Department\DepartmentController;
+use App\Http\Controllers\AdminPortal\HRM\HolidayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,5 +105,18 @@ Route::middleware(['auth:sanctum'])
         Route::get('/edit/{id}', [AttendanceController::class, 'edit'])->name('edit');
         Route::post('/update', [AttendanceController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [AttendanceController::class, 'delete'])->name('delete');
-        Route::post('/server-side-data', [AttendanceController::class, 'serverSideAllDesignations'])->name('server-side-data');
+        Route::post('/server-side-data', [AttendanceController::class, 'serverSideAllAttendances'])->name('server-side-data');
+    });
+
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('holidays')
+    ->name('holidays.')
+    ->group(function () {
+        Route::get('/', [HolidayController::class, 'index'])->name('all');
+        Route::post('/add', [HolidayController::class, 'add'])->name('add');
+        Route::get('/edit/{id}', [HolidayController::class, 'edit'])->name('edit');
+        Route::post('/update', [HolidayController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [HolidayController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [HolidayController::class, 'serverSideAllHolidays'])->name('server-side-data');
     });

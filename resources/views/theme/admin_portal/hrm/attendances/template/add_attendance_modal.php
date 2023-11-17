@@ -14,7 +14,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label fs-7 required">Employees</label>
-                                <select class="form-control form-control-md" name="department_id" required>
+                                <select class="form-control form-control-md" name="employee_id" required>
                                     <option>Select An Option</option>
                                     <?php if (isset($employees) && !empty($employees)) { ?>
                                         <?php foreach ($employees as $employees) { ?>
@@ -30,7 +30,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label fs-7 required">Date</label>
-                                <input type="date" name="date" class="form-control" placeholder="Enter Date" required>
+                                <input type="text" name="date" class="form-control date_picker" placeholder="Enter Date" required>
                             </div>
                         </div>
                     </div>
@@ -38,13 +38,13 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label fs-7 required">Time In</label>
-                                <input type="date" name="time_in" class="form-control" placeholder="Enter Time In" required>
+                                <input type="text" name="time_in" class="form-control time_picker" placeholder="Enter Time In" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label fs-7 required">Time Out</label>
-                                <input type="date" name="time_out" class="form-control" placeholder="Enter Time Out" required>
+                                <input type="text" name="time_out" class="form-control time_picker" placeholder="Enter Time Out" required>
                             </div>
                         </div>
                     </div>
@@ -57,3 +57,20 @@
         </div>
     </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+
+        $('.date_picker').datetimepicker({
+            datepicker: true,
+            timepicker: false,
+            format: 'Y-m-d'
+        });
+
+        $('.time_picker').datetimepicker({
+            datepicker: false,
+            format: 'H:i',
+        });
+
+    });
+</script>

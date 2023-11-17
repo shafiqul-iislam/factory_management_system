@@ -42,6 +42,7 @@
   <script src="<?php echo asset('/theme/assets/js/config.js'); ?>"></script>
 
   <link href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" rel="stylesheet" />
 
   <meta name="csrf-token" content="<?php echo csrf_token(); ?>">
 </head>

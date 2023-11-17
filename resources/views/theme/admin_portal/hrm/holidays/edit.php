@@ -10,36 +10,19 @@
             <h3 class="card-title">Update Attendance</h3>
         </div>
         <div class="card-body pt-4">
-            <input type="hidden" name="id" value="<?php echo $editAttendance->id; ?>">
+            <input type="hidden" name="id" value="<?php echo $editHoliday->id; ?>">
 
             <div class="row d-flex justify-content-center mb-4">
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label class="form-label fs-7 required">Employee</label>
-                        <select class="form-control form-control-md" name="employee_id" required>
-
-                            <?php if (isset($editAttendance->employeeData)) { ?>
-                                <option selected value="<?php echo $editAttendance->employeeData->id; ?>"><?php echo $editAttendance->employeeData->name; ?> (*) </option>
-                            <?php } else { ?>
-                                <option selected>N/A (*)</option>
-                            <?php } ?>
-
-                            <option>Select An Option</option>
-                            <?php if (isset($employees) && !empty($employees)) { ?>
-                                <?php foreach ($employees as $employees) { ?>
-
-                                    <option value="<?php echo $employees->id ?>">
-                                        <?php echo $employees->name ?>
-                                    </option>
-                                <?php } ?>
-                            <?php } ?>
-                        </select>
+                        <label class="form-label fs-7 required">Title</label>
+                        <input type="text" name="title" class="form-control date_picker" placeholder="Enter Title" value="<?php echo $editHoliday->title; ?>" required>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="form-group">
-                        <label class="form-label fs-7 required">Date</label>
-                        <input type="text" name="date" class="form-control date_picker" placeholder="Enter Date" value="<?php echo $editAttendance->date; ?>" required>
+                        <label class="form-label fs-7 required">Start Date</label>
+                        <input type="text" name="date" class="form-control date_picker" placeholder="Enter Start Date" value="<?php echo $editHoliday->start_date; ?>" required>
                     </div>
                 </div>
             </div>
