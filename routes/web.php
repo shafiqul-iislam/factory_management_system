@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminPortal\HRM\AttendanceController;
 use App\Http\Controllers\AdminPortal\HRM\DesignationController;
 use App\Http\Controllers\AdminPortal\Department\DepartmentController;
 use App\Http\Controllers\AdminPortal\HRM\HolidayController;
+use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,7 +70,7 @@ Route::middleware(['auth:sanctum'])
         Route::post('/server-side-data', [DepartmentController::class, 'serverSideAllDepartments'])->name('server-side-data');
     });
 
-    
+
 Route::middleware(['auth:sanctum'])
     ->prefix('employees')
     ->name('employees.')
@@ -119,4 +120,16 @@ Route::middleware(['auth:sanctum'])
         Route::post('/update', [HolidayController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [HolidayController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [HolidayController::class, 'serverSideAllHolidays'])->name('server-side-data');
+    });
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('leaves')
+    ->name('leaves.')
+    ->group(function () {
+        Route::get('/', [LeaveRequestController::class, 'index'])->name('all');
+        Route::post('/add', [LeaveRequestController::class, 'add'])->name('add');
+        Route::get('/edit/{id}', [LeaveRequestController::class, 'edit'])->name('edit');
+        Route::post('/update', [LeaveRequestController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [LeaveRequestController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [LeaveRequestController::class, 'serverSideAllleaves'])->name('server-side-data');
     });

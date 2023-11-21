@@ -87,7 +87,6 @@ class HolidayController extends Controller
     public function delete($id)
     {
         $deleteHoliday = Holiday::findOrFail($id)->delete();
-
         if ($deleteHoliday) {
             return redirect('/holidays')->with('success', 'Successfuly Deleted');
         } else {
@@ -133,10 +132,16 @@ class HolidayController extends Controller
                 $td[] = $holiday->title;
                 $td[] = $holiday->start_date;
                 $td[] = $holiday->finish_date;
+                // $td[] = strtotime($holiday->start_date) - strtotime($holiday->finish_date);
                 $td[] = '';
-                $td[] = $holiday->status;
-                $td[] = date('Y-m-d', strtotime($holiday->created_at));
 
+                if ($holiday->status == 1) {
+                    $td[] = 'Active';
+                } else {
+                    $td[] = 'Deactive';
+                }
+
+                $td[] = date('Y-m-d', strtotime($holiday->created_at));
                 // created by
                 if ($holiday->userData) {
                     $td[] = $holiday->userData->name;
