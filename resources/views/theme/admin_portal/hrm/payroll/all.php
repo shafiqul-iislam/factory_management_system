@@ -5,27 +5,24 @@
 
 <div class="card shadow-sm">
     <div class="card-header border-bottom d-flex align-items-center justify-content-between">
-        <h4 class="card-title">Leave Request</h4>
+        <h4 class="card-title">Payroll</h4>
         <div class="card-toolbar">
             <button type="button" class="btn btn-primary btn-md me-3 fs-6" data-bs-toggle="modal" data-bs-target=".add_leave_request_modal">
-                Add Leave Request
+                Add Payroll
             </button>
         </div>
     </div>
     <div class="card-body py-4">
         <div class="table-responsive">
-            <table class="table align-items-center mb-0" id="dt_leave_request">
+            <table class="table align-items-center mb-0" id="dt_payroll">
                 <thead>
                     <tr class="text-start fs-6">
                         <th class="font-weight-bolder" style="min-width: 40px;">ID</th>
-                        <th class="font-weight-bolder" style="min-width: 150px;">Department</th>
                         <th class="font-weight-bolder" style="min-width: 150px;">Employee</th>
-                        <th class="font-weight-bolder" style="min-width: 150px;">Leave Type</th>
-                        <th class="font-weight-bolder" style="min-width: 150px;">Start Date</th>
-                        <th class="font-weight-bolder" style="min-width: 150px;">Finish Date</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Days</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Amount</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Method</th>
+                        <th class="font-weight-bolder" style="min-width: 150px;">Date</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Status</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Created At</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Created By</th>
                         <th class="font-weight-bolder text-end" style="min-width: 100px;">Actions</th>
                     </tr>
@@ -38,13 +35,13 @@
 </div>
 
 <?php include(resource_path('/views/theme/admin_portal/dashboard/footer.php')) ?>
-<?php include(resource_path('/views/theme/admin_portal/hrm/leave_request/template/add_leave_request_modal.php')) ?>
+<?php include(resource_path('/views/theme/admin_portal/hrm/payroll/template/add_payroll_modal.php')) ?>
 
 <script>
     $(document).ready(function() {
-        var url = "<?php echo url('leaves/server-side-data'); ?>";
+        var url = "<?php echo url('payrolls/server-side-data'); ?>";
 
-        var table = $('#dt_leave_request').DataTable({
+        var table = $('#dt_payroll').DataTable({
             serverSide: true,
             processing: true,
             orderable: false,

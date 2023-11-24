@@ -133,7 +133,8 @@
             </a>
           </li>
 
-          <li class="menu-item <?php echo request()->is('employees') ? 'show' : ''; ?>">
+          <!-- hrm -->
+          <li class="menu-item <?php echo request()->is('employees*', 'designations', 'attendances', 'holidays', 'leaves') ? 'active open' : ''; ?>">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bx-layout"></i>
               <div data-i18n="Layouts">HRM</div>
@@ -148,6 +149,21 @@
               <li class="menu-item <?php echo request()->is('designations') ? 'active' : ''; ?>">
                 <a href="<?php echo url('designations'); ?>" class="menu-link">
                   <div data-i18n="Without menu">Designations</div>
+                </a>
+              </li>
+              <li class="menu-item <?php echo request()->is('attendances') ? 'active' : ''; ?>">
+                <a href="<?php echo url('attendances'); ?>" class="menu-link">
+                  <div data-i18n="Without menu">Attendance</div>
+                </a>
+              </li>
+              <li class="menu-item <?php echo request()->is('holidays') ? 'active' : ''; ?>">
+                <a href="<?php echo url('holidays'); ?>" class="menu-link">
+                  <div data-i18n="Without menu">Holidays</div>
+                </a>
+              </li>
+              <li class="menu-item <?php echo request()->is('leaves') ? 'active' : ''; ?>">
+                <a href="<?php echo url('leaves'); ?>" class="menu-link">
+                  <div data-i18n="Without menu">Leave Request</div>
                 </a>
               </li>
             </ul>

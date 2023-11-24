@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminPortal\HRM\DesignationController;
 use App\Http\Controllers\AdminPortal\Department\DepartmentController;
 use App\Http\Controllers\AdminPortal\HRM\HolidayController;
 use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
+use App\Http\Controllers\AdminPortal\HRM\PayrollController;
 
 /*
 |--------------------------------------------------------------------------
@@ -131,5 +132,18 @@ Route::middleware(['auth:sanctum'])
         Route::get('/edit/{id}', [LeaveRequestController::class, 'edit'])->name('edit');
         Route::post('/update', [LeaveRequestController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [LeaveRequestController::class, 'delete'])->name('delete');
-        Route::post('/server-side-data', [LeaveRequestController::class, 'serverSideAllleaves'])->name('server-side-data');
+        Route::post('/server-side-data', [LeaveRequestController::class, 'serverSideAllLeaves'])->name('server-side-data');
+    });
+
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('payrolls')
+    ->name('payrolls.')
+    ->group(function () {
+        Route::get('/', [PayrollController::class, 'index'])->name('all');
+        Route::post('/add', [PayrollController::class, 'add'])->name('add');
+        Route::get('/edit/{id}', [PayrollController::class, 'edit'])->name('edit');
+        Route::post('/update', [PayrollController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [PayrollController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [PayrollController::class, 'serverSideAllPayrolls'])->name('server-side-data');
     });
