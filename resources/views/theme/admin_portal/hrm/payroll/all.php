@@ -7,7 +7,7 @@
     <div class="card-header border-bottom d-flex align-items-center justify-content-between">
         <h4 class="card-title">Payroll</h4>
         <div class="card-toolbar">
-            <button type="button" class="btn btn-primary btn-md me-3 fs-6" data-bs-toggle="modal" data-bs-target=".add_leave_request_modal">
+            <button type="button" class="btn btn-primary btn-md me-3 fs-6" data-bs-toggle="modal" data-bs-target=".add_payroll_modal">
                 Add Payroll
             </button>
         </div>
@@ -18,6 +18,7 @@
                 <thead>
                     <tr class="text-start fs-6">
                         <th class="font-weight-bolder" style="min-width: 40px;">ID</th>
+                        <th class="font-weight-bolder" style="min-width: 150px;">Department</th>
                         <th class="font-weight-bolder" style="min-width: 150px;">Employee</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Amount</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Method</th>

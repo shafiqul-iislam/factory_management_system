@@ -147,3 +147,8 @@ Route::middleware(['auth:sanctum'])
         Route::delete('/delete/{id}', [PayrollController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [PayrollController::class, 'serverSideAllPayrolls'])->name('server-side-data');
     });
+
+
+
+
+    // ############# need to add balance module ##############
