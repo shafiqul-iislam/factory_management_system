@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminPortal\Department\DepartmentController;
 use App\Http\Controllers\AdminPortal\HRM\HolidayController;
 use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
 use App\Http\Controllers\AdminPortal\HRM\PayrollController;
+use App\Http\Controllers\AdminPortal\Product\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -146,6 +147,18 @@ Route::middleware(['auth:sanctum'])
         Route::post('/update', [PayrollController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [PayrollController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [PayrollController::class, 'serverSideAllPayrolls'])->name('server-side-data');
+    });
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('products')
+    ->name('products.')
+    ->group(function () {
+        Route::get('/', [ProductsController::class, 'index'])->name('all');
+        Route::post('/add', [ProductsController::class, 'add'])->name('add');
+        Route::get('/edit/{id}', [ProductsController::class, 'edit'])->name('edit');
+        Route::post('/update', [ProductsController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [ProductsController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [ProductsController::class, 'serverSideAllPayrolls'])->name('server-side-data');
     });
 
 

@@ -166,6 +166,53 @@
                   <div data-i18n="Without menu">Leave Request</div>
                 </a>
               </li>
+              <li class="menu-item <?php echo request()->is('payrolls') ? 'active' : ''; ?>">
+                <a href="<?php echo url('payrolls'); ?>" class="menu-link">
+                  <div data-i18n="Without menu">Payroll</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- products -->
+          <li class="menu-item <?php echo request()->is('products') ? 'active' : ''; ?>">
+            <a href="<?php echo url('products'); ?>" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-collection"></i>
+              <div data-i18n="Basic">Products</div>
+            </a>
+          </li>
+
+          <!-- production -->
+          <li class="menu-item <?php echo request()->is('production') ? 'active' : ''; ?>">
+            <a href="<?php echo url('production'); ?>" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-collection"></i>
+              <div data-i18n="Basic">Production</div>
+            </a>
+          </li>
+
+
+          <li class="menu-item <?php echo request()->is('employees*', 'designations', 'attendances', 'holidays', 'leaves') ? 'active open' : ''; ?>">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-layout"></i>
+              <div data-i18n="Layouts">Inventory</div>
+            </a>
+
+            <ul class="menu-sub">
+              <li class="menu-item <?php echo request()->is('employees') ? 'active' : ''; ?>">
+                <a href="<?php echo url('employees'); ?>" class="menu-link">
+                  <div data-i18n="Without menu">Employees</div>
+                </a>
+              </li>
+              <li class="menu-item <?php echo request()->is('designations') ? 'active' : ''; ?>">
+                <a href="<?php echo url('designations'); ?>" class="menu-link">
+                  <div data-i18n="Without menu">Designations</div>
+                </a>
+              </li>
+              <li class="menu-item <?php echo request()->is('attendances') ? 'active' : ''; ?>">
+                <a href="<?php echo url('attendances'); ?>" class="menu-link">
+                  <div data-i18n="Without menu">Attendance</div>
+                </a>
+              </li>
             </ul>
           </li>
 
