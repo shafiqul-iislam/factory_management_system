@@ -158,7 +158,7 @@ Route::middleware(['auth:sanctum'])
         Route::get('/edit/{id}', [ProductsController::class, 'edit'])->name('edit');
         Route::post('/update', [ProductsController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [ProductsController::class, 'delete'])->name('delete');
-        Route::post('/server-side-data', [ProductsController::class, 'serverSideAllPayrolls'])->name('server-side-data');
+        Route::post('/server-side-data', [ProductsController::class, 'serverSideAllProducts'])->name('server-side-data');
     });
 
 
