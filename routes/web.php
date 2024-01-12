@@ -3,14 +3,15 @@
 use App\Models\Designation;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPortal\UserController;
+use App\Http\Controllers\AdminPortal\HRM\HolidayController;
+use App\Http\Controllers\AdminPortal\HRM\PayrollController;
 use App\Http\Controllers\AdminPortal\HRM\EmployeeController;
 use App\Http\Controllers\AdminPortal\HRM\AttendanceController;
 use App\Http\Controllers\AdminPortal\HRM\DesignationController;
-use App\Http\Controllers\AdminPortal\Department\DepartmentController;
-use App\Http\Controllers\AdminPortal\HRM\HolidayController;
 use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
-use App\Http\Controllers\AdminPortal\HRM\PayrollController;
 use App\Http\Controllers\AdminPortal\Product\ProductsController;
+use App\Http\Controllers\AdminPortal\Department\DepartmentController;
+use App\Http\Controllers\AdminPortal\Production\ProductionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -159,6 +160,19 @@ Route::middleware(['auth:sanctum'])
         Route::post('/update', [ProductsController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [ProductsController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [ProductsController::class, 'serverSideAllProducts'])->name('server-side-data');
+    });
+
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('productions')
+    ->name('productions.')
+    ->group(function () {
+        Route::get('/', [ProductionController::class, 'index'])->name('all');
+        Route::post('/add', [ProductionController::class, 'add'])->name('add');
+        Route::get('/edit/{id}', [ProductionController::class, 'edit'])->name('edit');
+        Route::post('/update', [ProductionController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [ProductionController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [ProductionController::class, 'serverSideAllProductions'])->name('server-side-data');
     });
 
 

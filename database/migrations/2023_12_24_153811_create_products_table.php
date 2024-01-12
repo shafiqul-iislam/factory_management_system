@@ -22,6 +22,12 @@ return new class extends Migration
             $table->string('created_by_username')->nullable();
             $table->timestamps();
 
+            // need to add brands field
+
+            // need to add units module
+
+            // stock count -> follow slaes pro inventory application 
+
             $table->index('name');
         });
     }

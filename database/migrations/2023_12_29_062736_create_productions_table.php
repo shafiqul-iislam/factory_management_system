@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('total_production')->nullable();
             $table->integer('supervisor_id')->nullable();
             $table->integer('status')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
 
 
