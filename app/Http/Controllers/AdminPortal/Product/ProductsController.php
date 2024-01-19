@@ -28,17 +28,17 @@ class ProductsController extends Controller
             return redirect()->back()->with('error', $error);
         } else {
 
-            $addLeave = new Product;
-            $addLeave->status = ($request->status == 'on') ? 1 : 0;
-            $addLeave->department_id = $request->department_id;
-            $addLeave->name = $request->name;
-            $addLeave->category = $request->category;
-            $addLeave->note = $request->note;
+            $addProduct = new Product;
+            $addProduct->status = ($request->status == 'on') ? 1 : 0;
+            $addProduct->department_id = $request->department_id;
+            $addProduct->name = $request->name;
+            $addProduct->category = $request->category;
+            $addProduct->note = $request->note;
 
             $loginUserData = auth()->user();
-            $addLeave->created_by_id = $loginUserData->id;
-            $addLeave->created_by_username = $loginUserData->name;
-            $response = $addLeave->save();
+            $addProduct->created_by_id = $loginUserData->id;
+            $addProduct->created_by_username = $loginUserData->name;
+            $response = $addProduct->save();
 
             if ($response) {
                 return redirect('/products')->with('success', 'Successfuly Added');

@@ -4,15 +4,60 @@ namespace App\Http\Controllers\AdminPortal\Production;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Department\Department;
+use App\Models\HRM\Designation;
+use App\Models\HRM\Employee;
+use App\Models\Product\Product;
 use App\Models\Production\Production;
+use Illuminate\Support\Facades\Validator;
 
 class ProductionController extends Controller
 {
     public function index()
     {
-        return view('theme.admin_portal.production.all');
+        $data['products'] = Product::select('id', 'name', 'category')->get();
+
+        return view('theme.admin_portal.production.all', $data);
     }
 
+
+    public function add(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            return redirect()->back()->with('error', $error);
+        } else {
+
+            $productData = Product::findOrFail($request->product_id);
+
+            $addProduction = new Production;
+            $addProduction->status = ($request->status == 'on') ? 1 : 0;
+            $addProduction->product_id = $productData->id;
+            $addProduction->office_shift = $request->office_shift;
+            $addProduction->product_category = $productData->category;
+            $addProduction->department_id = $productData->department_id;
+
+            $addProduction->production_target = $request->production_target;
+            $addProduction->total_production = $request->total_production;
+            $addProduction->supervisor_id = $request->supervisor_id;
+            $addProduction->note = $request->note;
+
+            $loginUserData = auth()->user();
+            $addProduction->created_by_id = $loginUserData->id;
+            $addProduction->created_by_username = $loginUserData->name;
+            $response = $addProduction->save();
+
+            if ($response) {
+                return redirect('/productions')->with('success', 'Successfully Added');
+            } else {
+                return redirect('/productions')->with('error', 'Oops Something Wrong');
+            }
+        }
+    }
 
     // productions dataTables fetch by ajax
     public function serverSideAllProductions(Request $request)
@@ -55,7 +100,7 @@ class ProductionController extends Controller
                     $td[] = '';
                 }
 
-                $td[] = $production->category;
+                $td[] = $production->product_category;
 
                 if ($production->productData) {
                     $td[] = $production->productData->name;
@@ -63,10 +108,21 @@ class ProductionController extends Controller
                     $td[] = '';
                 }
 
-                $td[] = '';
-                $td[] = '';
-                $td[] = '';
-                $td[] = '';
+                $td[] = $production->production_target;
+                $td[] = $production->total_production;
+                $td[] = $production->production_target - $production->total_production;
+
+                if ($production->office_shift == 1) {
+                    $td[] = 'Day';
+                } else if ($production->office_shift == 2) {
+                    $td[] = 'Afternoon';
+                } else if ($production->office_shift == 3) {
+                    $td[] = 'Night';
+                } else if ($production->office_shift == 4) {
+                    $td[] = 'Others';
+                } else {
+                    $td[] = '';
+                }
 
                 if ($production->supervisorData) {
                     $td[] = $production->supervisorData->name;
@@ -87,7 +143,6 @@ class ProductionController extends Controller
                     $td[] = '';
                 }
                 $td[] = date('Y-m-d', strtotime($production->created_at));
-
                 $td[] = $actions;
                 $rows[] = $td;
             }
@@ -99,5 +154,17 @@ class ProductionController extends Controller
             );
             echo json_encode($json_data);
         }
+    }
+
+    // get supervisor list as per product's department
+    public function getEmployees(Request $request)
+    {
+        $productData = Product::find($request->product_id);
+
+        $designationData = Designation::where('department_id', $productData->department_id)->where('name', 'supervisor')->first();
+        
+        $employeeData = Employee::where('designation', $designationData->id)->get();
+
+        dd($employeeData);
     }
 }

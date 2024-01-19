@@ -22,9 +22,9 @@
                         <th class="font-weight-bolder" style="min-width: 100px;">Category</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Product</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Target</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Achivment</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Target Less</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Total</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Target Less</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Office Shift</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Supervisor</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Status</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Created By</th>

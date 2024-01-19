@@ -4,6 +4,7 @@ namespace App\Models\Production;
 
 use App\Models\User;
 use App\Models\Department\Department;
+use App\Models\HRM\Employee;
 use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +26,7 @@ class Production extends Model
 
     public function supervisorData()
     {
-        return $this->belongsTo(User::class, 'created_by_id');
+        return $this->belongsTo(Employee::class, 'supervisor_id');
     }
 
     public function productData()
