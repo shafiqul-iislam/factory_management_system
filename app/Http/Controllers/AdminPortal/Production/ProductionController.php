@@ -59,6 +59,59 @@ class ProductionController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $data['editProduction'] = Production::findOrFail($id);
+        $data['products'] = Product::select('id', 'name', 'category')->get();
+
+        return view('theme.admin_portal.production.edit', $data);
+    }
+
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            return redirect()->back()->with('error', $error);
+        } else {
+
+            $productData = Product::findOrFail($request->product_id);
+
+            $addProduction = Production::findOrFail($request->id);
+            $addProduction->status = ($request->status == 'on') ? 1 : 0;
+            $addProduction->product_id = $productData->id;
+            $addProduction->office_shift = $request->office_shift;
+            $addProduction->product_category = $productData->category;
+            $addProduction->department_id = $productData->department_id;
+
+            $addProduction->production_target = $request->production_target;
+            $addProduction->total_production = $request->total_production;
+            $addProduction->supervisor_id = $request->supervisor_id;
+            $addProduction->note = $request->note;
+            $response = $addProduction->save();
+
+            if ($response) {
+                return redirect('/productions')->with('success', 'Successfully Updated');
+            } else {
+                return redirect('/productions')->with('error', 'Oops! Something Wrong');
+            }
+        }
+    }
+
+    public function delete($id)
+    {
+        $deleteProduction = Production::findOrFail($id)->delete();
+        if ($deleteProduction) {
+            return redirect('/productions')->with('success', 'Successfully Deleted');
+        } else {
+            return redirect('/productions')->with('error', 'Oops Something Wrong');
+        }
+    }
+
     // productions dataTables fetch by ajax
     public function serverSideAllProductions(Request $request)
     {
@@ -159,12 +212,18 @@ class ProductionController extends Controller
     // get supervisor list as per product's department
     public function getEmployees(Request $request)
     {
-        $productData = Product::find($request->product_id);
+        $productData = Product::with('departmentData')->find($request->product_id);
+        $departmentData = $productData->departmentData;
 
-        $designationData = Designation::where('department_id', $productData->department_id)->where('name', 'supervisor')->first();
-        
-        $employeeData = Employee::where('designation', $designationData->id)->get();
+        $employeeData = Employee::where('department_id', $departmentData->id)->get();
 
-        dd($employeeData);
+        $options = "<option value=''>Select An Option</option>";
+        if (isset($employeeData)) {
+            foreach ($employeeData as $employee) {
+                $options .= '<option value=' . $employee->id . '>' . $employee->name . ' (' . $employee->designationData->name . ')</option>';
+            }
+        }
+
+        echo json_encode(['employess' => $options]);
     }
 }

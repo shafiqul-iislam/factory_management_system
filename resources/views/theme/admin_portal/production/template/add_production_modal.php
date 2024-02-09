@@ -65,15 +65,9 @@
                     <div class="row d-flex justify-content-center mb-3">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label class="form-label fw-bold fs-7 mb-1">Supervisors</label>
+                                <label class="form-label fw-bold fs-7 mb-1">Supervisors <span class="fw-normal">(As Per Product's Department)</span></label>
                                 <select class="form-control form-control-md" name="supervisor_id">
                                     <option value="">Select An Option</option>
-                                    <!-- employees -->
-                                    <?php if (isset($supervisors) && !empty($supervisors)) { ?>
-                                        <?php foreach ($supervisors as $supervisor) { ?>
-                                            <option value="<?php echo $supervisor->id ?>"><?php echo $supervisor->username ?></option>
-                                        <?php } ?>
-                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -99,6 +93,7 @@
     $(document).ready(function() {
 
         var productSelector = $('.add_production_modal select[name="product_id"]');
+        var supervisorSelector = $('.add_production_modal select[name="supervisor_id"]');
 
         productSelector.on('change', function() {
             var productId = $(this).val();
@@ -116,10 +111,8 @@
                     console.log(error);
                 },
                 success: function(data) {
-                    console.log(data);
-                    // selector.html('');
-                    // selector.prepend(data.options);
-                    // selector.select2('');
+                    supervisorSelector.html('');
+                    supervisorSelector.prepend(data.employess);
                 },
             });
         });
