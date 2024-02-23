@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminPortal\HRM\DesignationController;
 use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
 use App\Http\Controllers\AdminPortal\Product\ProductsController;
 use App\Http\Controllers\AdminPortal\Department\DepartmentController;
+use App\Http\Controllers\AdminPortal\Inventory\WarehouseController;
 use App\Http\Controllers\AdminPortal\Production\ProductionController;
 
 /*
@@ -174,9 +175,22 @@ Route::middleware(['auth:sanctum'])
         Route::delete('/delete/{id}', [ProductionController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [ProductionController::class, 'serverSideAllProductions'])->name('server-side-data');
 
-
         Route::post('/get-employees', [ProductionController::class, 'getEmployees'])->name('get-employees');
+    });
 
+
+//*********** inventory *************
+// warehouse
+Route::middleware(['auth:sanctum'])
+    ->prefix('warehouses')
+    ->name('warehouses.')
+    ->group(function () {
+        Route::get('/', [WarehouseController::class, 'index'])->name('all');
+        Route::post('/add', [WarehouseController::class, 'add'])->name('add');
+        Route::get('/edit/{id}', [WarehouseController::class, 'edit'])->name('edit');
+        Route::post('/update', [WarehouseController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [WarehouseController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [WarehouseController::class, 'serverSideAllWarehouses'])->name('server-side-data');
     });
 
 
