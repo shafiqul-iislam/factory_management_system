@@ -52,7 +52,6 @@ class WarehouseController extends Controller
         return view('theme.admin_portal.inventory.warehouse.edit', $data);
     }
 
-
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -64,12 +63,12 @@ class WarehouseController extends Controller
             $error = $validator->errors();
             return redirect()->back()->with('error', $error);
         } else {
-            $updateProduct = Warehouse::findOrFail($request->id);
-            $updateProduct->status = ($request->status == 'on') ? 1 : 0;
-            $updateProduct->name = $request->name;
-            $updateProduct->address = $request->address;
-            $updateProduct->note = $request->note;
-            $response = $updateProduct->save();
+            $updateWarehouse = Warehouse::findOrFail($request->id);
+            $updateWarehouse->status = ($request->status == 'on') ? 1 : 0;
+            $updateWarehouse->name = $request->name;
+            $updateWarehouse->address = $request->address;
+            $updateWarehouse->note = $request->note;
+            $response = $updateWarehouse->save();
 
             if ($response) {
                 return redirect('/warehouses')->with('success', 'Successfully Updated');
@@ -78,7 +77,6 @@ class WarehouseController extends Controller
             }
         }
     }
-
 
     public function delete($id)
     {
@@ -90,7 +88,7 @@ class WarehouseController extends Controller
         }
     }
 
-    // leave requests dataTables fetch by ajax
+    // warehouse dataTables fetch by ajax
     public function serverSideAllWarehouses(Request $request)
     {
         $columns = array(

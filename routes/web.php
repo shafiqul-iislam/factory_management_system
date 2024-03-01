@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminPortal\HRM\DesignationController;
 use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
 use App\Http\Controllers\AdminPortal\Product\ProductsController;
 use App\Http\Controllers\AdminPortal\Department\DepartmentController;
+use App\Http\Controllers\AdminPortal\Inventory\CustomerController;
 use App\Http\Controllers\AdminPortal\Inventory\WarehouseController;
 use App\Http\Controllers\AdminPortal\Production\ProductionController;
 
@@ -191,6 +192,20 @@ Route::middleware(['auth:sanctum'])
         Route::post('/update', [WarehouseController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [WarehouseController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [WarehouseController::class, 'serverSideAllWarehouses'])->name('server-side-data');
+    });
+
+
+// customer
+Route::middleware(['auth:sanctum'])
+    ->prefix('customers')
+    ->name('customers.')
+    ->group(function () {
+        Route::get('/', [CustomerController::class, 'index'])->name('all');
+        Route::post('/add', [CustomerController::class, 'add'])->name('add');
+        Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('edit');
+        Route::post('/update', [CustomerController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [CustomerController::class, 'serverSideAllCustomers'])->name('server-side-data');
     });
 
 
