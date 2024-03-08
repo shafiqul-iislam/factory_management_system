@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
 use App\Http\Controllers\AdminPortal\Product\ProductsController;
 use App\Http\Controllers\AdminPortal\Department\DepartmentController;
 use App\Http\Controllers\AdminPortal\Inventory\CustomerController;
+use App\Http\Controllers\AdminPortal\Inventory\StockAdjustmentController;
 use App\Http\Controllers\AdminPortal\Inventory\WarehouseController;
 use App\Http\Controllers\AdminPortal\Production\ProductionController;
 
@@ -206,6 +207,20 @@ Route::middleware(['auth:sanctum'])
         Route::post('/update', [CustomerController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [CustomerController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [CustomerController::class, 'serverSideAllCustomers'])->name('server-side-data');
+    });
+
+
+// customer
+Route::middleware(['auth:sanctum'])
+    ->prefix('stocks')
+    ->name('stocks.')
+    ->group(function () {
+        Route::get('/', [StockAdjustmentController::class, 'index'])->name('all');
+        Route::post('/add', [StockAdjustmentController::class, 'add'])->name('add');
+        Route::get('/edit/{id}', [StockAdjustmentController::class, 'edit'])->name('edit');
+        Route::post('/update', [StockAdjustmentController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [StockAdjustmentController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [StockAdjustmentController::class, 'serverSideAllStocks'])->name('server-side-data');
     });
 
 
