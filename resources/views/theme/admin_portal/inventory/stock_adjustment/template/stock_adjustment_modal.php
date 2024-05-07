@@ -1,7 +1,7 @@
 <form action="<?php echo url('stocks/add'); ?>" method="post" enctype="">
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
 
-    <div class="modal fade add_warehouse_modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade add_new_stock_modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -24,6 +24,11 @@
                                 <label class="required fw-bold fs-7 mb-1">Products</label>
                                 <select class="form-control form-control-md" name="product_id" required>
                                     <option value="">Select A Product</option>
+                                    <?php if (isset($products) && !empty($products)) { ?>
+                                        <?php foreach ($products as $product) { ?>
+                                            <option value="<?php echo $product->id ?>"><?php echo $product->name . ' (' . $product->category . ')' ?></option>
+                                        <?php } ?>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>

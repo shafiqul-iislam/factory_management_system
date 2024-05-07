@@ -3,16 +3,51 @@
 namespace App\Http\Controllers\AdminPortal\Inventory;
 
 use Illuminate\Http\Request;
+use App\Models\Product\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Stock\StockAdjustment;
+use Illuminate\Support\Facades\Validator;
 
 class StockAdjustmentController extends Controller
 {
     public function index()
     {
-        return view('theme.admin_portal.inventory.stock_adjustment.all');
+        $data['products'] = Product::select('id', 'name', 'category')->get();
+
+        return view('theme.admin_portal.inventory.stock_adjustment.all', $data);
     }
 
+
+    public function add(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required',
+            'stock_quantity' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            return redirect()->back()->with('error', $error);
+        } else {
+
+            $addStock = new StockAdjustment;
+            $addStock->status = ($request->status == 'on') ? 1 : 0;
+            $addStock->product_code = $request->product_id;
+            $addStock->stock_quantity = $request->stock_quantity;
+            $addStock->note = $request->note;
+
+            $loginUserData = auth()->user();
+            $addStock->created_by_id = $loginUserData->id;
+            $addStock->created_by_username = $loginUserData->name;
+            $response = $addStock->save();
+
+            if ($response) {
+                return redirect('/stocks')->with('success', 'Successfully Added');
+            } else {
+                return redirect('/stocks')->with('error', 'Oops! Something Wrong');
+            }
+        }
+    }
 
     // stocks dataTables fetch by ajax
     public function serverSideAllStocks(Request $request)
@@ -21,7 +56,7 @@ class StockAdjustmentController extends Controller
             0 => 'id',
         );
 
-        $query = StockAdjustment::orderBy($columns[$request->input('order.0.column')], $request->input('order.0.dir'));
+        $query = StockAdjustment::with(['productData'])->orderBy($columns[$request->input('order.0.column')], $request->input('order.0.dir'));
 
         $totalRecords = $query->count();
         $totalFiltered = $totalRecords;
@@ -48,7 +83,7 @@ class StockAdjustmentController extends Controller
 
                 $td = [];
                 $td[] = $stock->id;
-                $td[] = '';
+                $td[] = $stock->productData?->name ?? '';
                 $td[] = $stock->stock_quantity;
                 $td[] = $stock->note;
 
