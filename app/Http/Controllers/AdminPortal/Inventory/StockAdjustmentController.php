@@ -12,7 +12,7 @@ class StockAdjustmentController extends Controller
 {
     public function index()
     {
-        $data['products'] = Product::select('id', 'name', 'category')->get();
+        $data['products'] = Product::select('id', 'product_code', 'name', 'category')->get();
 
         return view('theme.admin_portal.inventory.stock_adjustment.all', $data);
     }
@@ -21,7 +21,7 @@ class StockAdjustmentController extends Controller
     public function add(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'product_id' => 'required',
+            'product_code' => 'required',
             'stock_quantity' => 'required',
         ]);
 
@@ -32,7 +32,7 @@ class StockAdjustmentController extends Controller
 
             $addStock = new StockAdjustment;
             $addStock->status = ($request->status == 'on') ? 1 : 0;
-            $addStock->product_code = $request->product_id;
+            $addStock->product_code = $request->product_code;
             $addStock->stock_quantity = $request->stock_quantity;
             $addStock->note = $request->note;
 
@@ -46,6 +46,52 @@ class StockAdjustmentController extends Controller
             } else {
                 return redirect('/stocks')->with('error', 'Oops! Something Wrong');
             }
+        }
+    }
+
+
+    public function edit($id)
+    {
+        $data['stockData'] = StockAdjustment::findOrFail($id);
+
+        $data['products'] = Product::select('id', 'product_code', 'name', 'category')->get();
+
+        return view('theme.admin_portal.inventory.stock_adjustment.edit', $data);
+    }
+
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'product_code' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            return redirect()->back()->with('error', $error);
+        } else {
+            $updateWarehouse = StockAdjustment::findOrFail($request->id);
+            $updateWarehouse->status = ($request->status == 'on') ? 1 : 0;
+            $updateWarehouse->product_code = $request->product_code;
+            $updateWarehouse->stock_quantity += $request->adjust_stock;
+            $updateWarehouse->note = $request->note;
+            $response = $updateWarehouse->save();
+
+            if ($response) {
+                return redirect('/stocks')->with('success', 'Successfully Updated');
+            } else {
+                return redirect('/stocks')->with('error', 'Oops! Something Wrong');
+            }
+        }
+    }
+
+    public function delete($id)
+    {
+        $deleteStocks = StockAdjustment::findOrFail($id)->delete();
+        if ($deleteStocks) {
+            return redirect('/stocks')->with('success', 'Successfuly Deleted');
+        } else {
+            return redirect('/stocks')->with('error', 'Oops! Something Wrong');
         }
     }
 
@@ -96,8 +142,8 @@ class StockAdjustmentController extends Controller
                 $td[] = date('Y-m-d', strtotime($stock->created_at));
 
                 // created by
-                if ($stock->userData) {
-                    $td[] = $stock->userData->name;
+                if ($stock->createdByData) {
+                    $td[] = $stock->createdByData->name;
                 } else {
                     $td[] = '';
                 }

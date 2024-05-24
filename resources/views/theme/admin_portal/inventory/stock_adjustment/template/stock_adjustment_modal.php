@@ -22,11 +22,11 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="required fw-bold fs-7 mb-1">Products</label>
-                                <select class="form-control form-control-md" name="product_id" required>
+                                <select class="form-control form-control-md" name="product_code" required>
                                     <option value="">Select A Product</option>
                                     <?php if (isset($products) && !empty($products)) { ?>
                                         <?php foreach ($products as $product) { ?>
-                                            <option value="<?php echo $product->id ?>"><?php echo $product->name . ' (' . $product->category . ')' ?></option>
+                                            <option value="<?php echo $product->product_code ?>"><?php echo $product->name . ' (' . $product->category . ')' ?></option>
                                         <?php } ?>
                                     <?php } ?>
                                 </select>
