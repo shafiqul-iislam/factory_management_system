@@ -19,11 +19,14 @@
                     <tr class="text-start fs-6">
                         <th class="font-weight-bolder" style="min-width: 40px;">ID</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Department</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Category</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Product</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Category</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Target</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Total</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Target Less</th>
+
+                        <th class="font-weight-bolder" style="min-width: 100px;">Units</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Brand</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Office Shift</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Supervisor</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Status</th>

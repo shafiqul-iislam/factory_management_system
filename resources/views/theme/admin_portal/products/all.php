@@ -18,10 +18,13 @@
                 <thead>
                     <tr class="text-start fs-6">
                         <th class="font-weight-bolder" style="min-width: 40px;">ID</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Department</th>
+                        <th class="font-weight-bolder" style="min-width: 150px;">Product Code</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Name</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Department</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Category</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Note</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Units</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Brand</th>
+                        <th class="font-weight-bolder" style="min-width: 150px;">Alert Quantity</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Status</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Created By</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Created At</th>

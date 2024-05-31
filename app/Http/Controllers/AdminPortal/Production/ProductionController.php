@@ -165,6 +165,14 @@ class ProductionController extends Controller
                 $td[] = $production->total_production;
                 $td[] = $production->production_target - $production->total_production;
 
+                if ($production->productData) {
+                    $td[] = $production->productData->units;
+                    $td[] = $production->productData->brand;
+                } else {
+                    $td[] = '';
+                    $td[] = '';
+                }
+
                 if ($production->office_shift == 1) {
                     $td[] = 'Day';
                 } else if ($production->office_shift == 2) {
@@ -213,17 +221,21 @@ class ProductionController extends Controller
     public function getEmployees(Request $request)
     {
         $productData = Product::with('departmentData')->find($request->product_id);
-        $departmentData = $productData->departmentData;
 
-        $employeeData = Employee::where('department_id', $departmentData->id)->get();
+        // if (isset($productData, $productData->departmentData)) {
 
-        $options = "<option value=''>Select An Option</option>";
-        if (isset($employeeData)) {
-            foreach ($employeeData as $employee) {
-                $options .= '<option value=' . $employee->id . '>' . $employee->name . ' (' . $employee->designationData->name . ')</option>';
+            $employeeData = Employee::where('department_id', $productData->departmentData->id)->get();
+
+            $options = "<option value=''>Select An Option</option>";
+            if (isset($employeeData)) {
+                foreach ($employeeData as $employee) {
+                    $options .= '<option value=' . $employee->id . '>' . $employee->name . ' (' . $employee->designationData->name . ')</option>';
+                }
             }
-        }
 
-        echo json_encode(['employess' => $options]);
+            echo json_encode(['employess' => $options]);
+        // }
+
+        // echo json_encode(false);
     }
 }

@@ -46,8 +46,36 @@
                     <div class="row d-flex justify-content-center mb-3">
                         <div class="col-lg-6">
                             <div class="form-group">
+                                <label class="required fw-bold fs-7 mb-1">Product Code</label>
+                                <input type="text" name="product_code" class="form-control form-control-solid" placeholder="Enter Product Code">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
                                 <label class="required fw-bold fs-7 mb-1">Category</label>
                                 <input type="text" name="category" class="form-control form-control-solid" placeholder="Enter Product Category">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center mb-3">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="required fw-bold fs-7 mb-1">Brand</label>
+                                <input type="text" name="brand" class="form-control form-control-solid" placeholder="Enter Product Brand">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="required fw-bold fs-7 mb-1">Units</label>
+                                <input type="text" name="units" class="form-control form-control-solid" placeholder="Enter Product Units">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center align-items-center mb-3">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="required fw-bold fs-7 mb-1">Alert Quantity</label>
+                                <input type="number" name="alert_quantity" class="form-control form-control-solid" placeholder="Enter Alert Quantity">
                             </div>
                         </div>
                         <div class="col-lg-6">

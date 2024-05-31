@@ -30,9 +30,13 @@ class ProductsController extends Controller
 
             $addProduct = new Product;
             $addProduct->status = ($request->status == 'on') ? 1 : 0;
+            $addProduct->product_code = $request->product_code;
             $addProduct->department_id = $request->department_id;
             $addProduct->name = $request->name;
             $addProduct->category = $request->category;
+            $addProduct->brand = $request->brand;
+            $addProduct->units = $request->units;
+            $addProduct->alert_quantity = $request->alert_quantity;
             $addProduct->note = $request->note;
 
             $loginUserData = auth()->user();
@@ -51,7 +55,7 @@ class ProductsController extends Controller
 
     public function edit($id)
     {
-        $data['departments'] = Department::select('id', 'name')->get();        
+        $data['departments'] = Department::select('id', 'name')->get();
         $data['editProduct'] = Product::findOrFail($id);
 
         return view('theme.admin_portal.products.edit', $data);
@@ -71,10 +75,14 @@ class ProductsController extends Controller
         } else {
             $updateProduct = Product::findOrFail($request->id);
             $updateProduct->status = ($request->status == 'on') ? 1 : 0;
+            $updateProduct->product_code = $request->product_code;
             $updateProduct->department_id = $request->department_id;
             $updateProduct->name = $request->name;
             $updateProduct->category = $request->category;
-            $updateProduct->note = $request->note;          
+            $updateProduct->brand = $request->brand;
+            $updateProduct->units = $request->units;
+            $updateProduct->alert_quantity = $request->alert_quantity;
+            $updateProduct->note = $request->note;
             $response = $updateProduct->save();
 
             if ($response) {
@@ -131,6 +139,8 @@ class ProductsController extends Controller
 
                 $td = [];
                 $td[] = $product->id;
+                $td[] = $product->product_code;
+                $td[] = $product->name;
 
                 if ($product->departmentData) {
                     $td[] = $product->departmentData->name;
@@ -138,14 +148,15 @@ class ProductsController extends Controller
                     $td[] = '';
                 }
 
-                $td[] = $product->name;
                 $td[] = $product->category;
-                $td[] = $product->note;
+                $td[] = $product->units;
+                $td[] = $product->brand;
+                $td[] = $product->alert_quantity;
 
                 if ($product->status == 1) {
-                    $td[] = 'Active';
+                    $td[] = '<span class="text-success">Active</span>';
                 } else {
-                    $td[] = 'Deactive';
+                    $td[] = '<span class="text-danger">Deactive</span>';
                 }
 
                 // created by

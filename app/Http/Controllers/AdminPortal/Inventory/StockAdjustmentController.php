@@ -131,7 +131,10 @@ class StockAdjustmentController extends Controller
                 $td[] = $stock->id;
                 $td[] = $stock->productData?->name ?? '';
                 $td[] = $stock->stock_quantity;
-                $td[] = $stock->note;
+                $td[] = $stock->productData?->category ?? '';
+                $td[] = $stock->productData?->units ?? '';
+                $td[] = $stock->productData?->brand ?? '';
+                $td[] = $stock->productData?->departmentData?->name ?? '';
 
                 if ($stock->status == 1) {
                     $td[] = 'Active';

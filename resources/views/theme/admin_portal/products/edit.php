@@ -54,11 +54,40 @@
                 </div>
             </div>
 
-            <div class="row d-flex justify-content-center mb-0">
+            <div class="row d-flex justify-content-center mb-4">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="required fw-bold fs-7 mb-1">Product Code</label>
+                        <input type="text" name="product_code" class="form-control form-control-solid" placeholder="Enter Product Code" value="<?php echo $editProduct->product_code; ?>">
+                    </div>
+                </div>
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label class="required fw-bold fs-7 mb-1">Category</label>
                         <input type="text" name="category" class="form-control form-control-solid" placeholder="Enter Product Category" value="<?php echo $editProduct->category; ?>">
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center mb-4">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="required fw-bold fs-7 mb-1">Brand</label>
+                        <input type="text" name="brand" class="form-control form-control-solid" placeholder="Enter Product Brand" value="<?php echo $editProduct->brand; ?>">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="required fw-bold fs-7 mb-1">Units</label>
+                        <input type="text" name="units" class="form-control form-control-solid" placeholder="Enter Product Units" value="<?php echo $editProduct->units; ?>">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row d-flex justify-content-center mb-0">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="required fw-bold fs-7 mb-1">Alert Quantity</label>
+                        <input type="number" name="alert_quantity" class="form-control form-control-solid" placeholder="Enter Alert Quantity" value="<?php echo $editProduct->alert_quantity; ?>">
                     </div>
                 </div>
                 <div class="col-lg-4">

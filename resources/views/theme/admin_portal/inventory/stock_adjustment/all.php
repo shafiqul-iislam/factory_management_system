@@ -18,9 +18,12 @@
                 <thead>
                     <tr class="text-start fs-6">
                         <th class="font-weight-bolder" style="min-width: 40px;">ID</th>
-                        <th class="font-weight-bolder" style="min-width: 200px;">Products</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Stock</th>
-                        <th class="font-weight-bolder" style="min-width: 150px;">Note</th>
+                        <th class="font-weight-bolder" style="min-width: 150px;">Products</th>
+                        <th class="font-weight-bolder" style="min-width: 150px;">Stock Quantity</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Category</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Units</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Brand</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Department</th>
                         <th class="font-weight-bolder" style="min-width: 80px;">Status</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Entry Date</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Created By</th>

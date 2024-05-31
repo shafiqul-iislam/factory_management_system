@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->string('product_code', 255)->nullable()->after('id');
+            $table->string('brand', 255)->nullable()->after('status');
+            $table->string('units', 255)->nullable()->after('brand');
+            $table->integer('alert_quantity')->nullable()->after('units');
         });
     }
 
