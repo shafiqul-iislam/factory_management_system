@@ -15,7 +15,9 @@ class ProductionController extends Controller
 {
     public function index()
     {
+        $data = [];
         $data['products'] = Product::select('id', 'name', 'category')->get();
+        $data['departments'] = Department::select('id', 'name')->get();
 
         return view('theme.admin_portal.production.all', $data);
     }
@@ -218,24 +220,33 @@ class ProductionController extends Controller
     }
 
     // get supervisor list as per product's department
-    public function getEmployees(Request $request)
+    public function getProductEmployees(Request $request)
     {
-        $productData = Product::with('departmentData')->find($request->product_id);
+        $productData = Product::where('department_id', $request->department_id)->get();
 
-        // if (isset($productData, $productData->departmentData)) {
-
-            $employeeData = Employee::where('department_id', $productData->departmentData->id)->get();
-
-            $options = "<option value=''>Select An Option</option>";
-            if (isset($employeeData)) {
-                foreach ($employeeData as $employee) {
-                    $options .= '<option value=' . $employee->id . '>' . $employee->name . ' (' . $employee->designationData->name . ')</option>';
-                }
+        // products list
+        $productOptions = "<option value=''>Select A Product</option>";
+        if (isset($productData)) {
+            foreach ($productData as $product) {
+                $productOptions .= '<option value=' . $product->id . '>' . $product->name . ' (' . $product->category . ')</option>';
             }
+        }
 
-            echo json_encode(['employess' => $options]);
-        // }
 
-        // echo json_encode(false);
+        // employee list
+        $employeeData = Employee::where('department_id', $request->department_id)->get();
+
+        $employeeOptions = "<option value=''>Select An Option</option>";
+        if (isset($employeeData)) {
+            foreach ($employeeData as $employee) {
+                $employeeOptions .= '<option value=' . $employee->id . '>' . $employee->name . ' (' . $employee->designationData->name . ')</option>';
+            }
+        }
+
+        if ([$employeeOptions, $productOptions]) {
+            echo json_encode(['employeeOptions' => $employeeOptions, 'productOptions' => $productOptions]);
+        } else {
+            echo json_encode(false);
+        }
     }
 }

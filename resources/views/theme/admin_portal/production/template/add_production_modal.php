@@ -10,6 +10,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+                    <div class="d-flex justify-content-center fixed-top mt-20">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="5 5 200 200" width="80" height="80" class="loader" style="display: none;">
+                            <linearGradient id="a11">
+                                <stop offset="0" stop-color="#FF156D" stop-opacity="0"></stop>
+                                <stop offset="1" stop-color="#FF156D"></stop>
+                            </linearGradient>
+                            <circle fill="none" stroke="url(#a11)" stroke-width="15" stroke-linecap="round" stroke-dasharray="0 44 0 44 0 44 0 44 0 360" cx="100" cy="100" r="70" transform-origin="center">
+                                <animateTransform type="rotate" attributeName="transform" calcMode="discrete" dur="2" values="360;324;288;252;216;180;144;108;72;36" repeatCount="indefinite"></animateTransform>
+                            </circle>
+                        </svg>
+                    </div>
+
                     <div class="row d-flex justify-content-center align-items-center mb-3">
                         <div class="col-lg-12">
                             <div class="form-check form-switch">
@@ -20,18 +33,36 @@
                     </div>
 
                     <div class="row d-flex justify-content-center mb-3">
-
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label fw-bold fs-7 required mb-1">Department</label>
+                                <select class="form-control form-control-md" name="department_id" required>
+                                    <option value="">Select A Department</option>
+                                    <?php if (isset($departments) && !empty($departments)) { ?>
+                                        <?php foreach ($departments as $department) { ?>
+                                            <option value="<?php echo $department->id; ?>"><?php echo $department->name; ?></option>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
                         <!-- ***** if select a product then get department data as well which department's supervisor by ajax ******* -->
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label fw-bold fs-7 required mb-1">Products</label>
                                 <select class="form-control form-control-md" name="product_id" required>
                                     <option value="">Select A Product</option>
-                                    <?php if (isset($products) && !empty($products)) { ?>
-                                        <?php foreach ($products as $product) { ?>
-                                            <option value="<?php echo $product->id ?>"><?php echo $product->name . ' (' . $product->category . ')' ?></option>
-                                        <?php } ?>
-                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center mb-3">
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label fw-bold fs-7 mb-1">Supervisors <span class="fw-normal">(As Per Product's Department)</span></label>
+                                <select class="form-control form-control-md" name="supervisor_id">
+                                    <option value="">Select An Option</option>
                                 </select>
                             </div>
                         </div>
@@ -63,15 +94,7 @@
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center mb-3">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="form-label fw-bold fs-7 mb-1">Supervisors <span class="fw-normal">(As Per Product's Department)</span></label>
-                                <select class="form-control form-control-md" name="supervisor_id">
-                                    <option value="">Select An Option</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="form-group">
                                 <label class="form-label fw-bold fs-7 mb-1">Note</label>
                                 <textarea class="form-control form-control-solid" name="note" rows="1" placeholder="Enter Note"></textarea>
@@ -92,27 +115,42 @@
 <script>
     $(document).ready(function() {
 
+        var departmentSelector = $('.add_production_modal select[name="department_id"]');
+
         var productSelector = $('.add_production_modal select[name="product_id"]');
         var supervisorSelector = $('.add_production_modal select[name="supervisor_id"]');
 
-        productSelector.on('change', function() {
-            var productId = $(this).val();
 
-            var url = "<?php echo url('productions/get-employees'); ?>";
+        departmentSelector.on('change', function() {
+            var departmentId = $(this).val();
+
+            var url = "<?php echo url('productions/get-products-employees'); ?>";
             $.ajax({
                 url: url,
                 type: "POST",
                 dataType: "Json",
                 data: {
                     "_token": "<?php echo csrf_token(); ?>",
-                    'product_id': productId
+                    'department_id': departmentId
                 },
                 error: function() {
                     console.log(error);
                 },
+                beforeSend: function() {
+                    $('.loader').show(500);
+                },
+                complete: function() {
+                    $('.loader').hide(500);
+                },
                 success: function(data) {
+                    productSelector.html('');
+                    productSelector.prepend(data.productOptions);
+                    productSelector.addClass('border-success');
+
                     supervisorSelector.html('');
-                    supervisorSelector.prepend(data.employess);
+                    supervisorSelector.prepend(data.employeeOptions);
+                    supervisorSelector.addClass('border-success');
+
                 },
             });
         });
