@@ -103,7 +103,7 @@
         <ul class="menu-inner py-1">
           <!-- Dashboard -->
           <li class="menu-item">
-            <a href="index.html" class="menu-link">
+            <a href="<?php echo url('home'); ?>" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
               <div data-i18n="Analytics">Dashboard</div>
             </a>
@@ -273,6 +273,20 @@
             </ul>
           </li>
 
+          <li class="menu-item">
+            <form method="POST" action="<?php echo route('logout'); ?>">
+              <?php //echo csrf_field(); 
+              ?>
+              <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
+
+              <button type="submit" class="menu-link btn btn-sm">
+                <i class="bx bx-power-off me-2"></i>
+                <span class="align-middle">Logout</span>
+              </button>
+            </form>
+          </li>
+
+
         </ul>
       </aside>
       <!-- / Menu -->
@@ -342,10 +356,16 @@
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="auth-login-basic.html">
-                    <i class="bx bx-power-off me-2"></i>
-                    <span class="align-middle">Log Out</span>
-                  </a>
+                  <form method="POST" action="<?php echo route('logout'); ?>">
+                    <?php //echo csrf_field(); 
+                    ?>
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
+
+                    <button type="submit" class="dropdown-item btn btn-sm">
+                      <i class="bx bx-power-off me-2"></i>
+                      <span class="align-middle fs-6">Logout</span>
+                    </button>
+                  </form>
                 </li>
               </ul>
             </li>

@@ -28,7 +28,7 @@ use App\Http\Controllers\AdminPortal\Production\ProductionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // after login
@@ -39,17 +39,23 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 
-// Route::middleware(['auth:sanctum'])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return redirect('/home');
-//     })->name('dashboard');
-// });
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/', function () {
+        return redirect('/home');
+    });
+});
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return redirect('/home');
     })->name('dashboard');
 });
+
+// Route::middleware(['auth:sanctum'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
 
 
 Route::middleware(['auth:sanctum'])
