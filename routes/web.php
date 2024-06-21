@@ -3,6 +3,7 @@
 use App\Models\Designation;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPortal\UserController;
+use App\Http\Controllers\AdminPortal\Role\RoleController;
 use App\Http\Controllers\AdminPortal\HRM\HolidayController;
 use App\Http\Controllers\AdminPortal\HRM\PayrollController;
 use App\Http\Controllers\AdminPortal\HRM\EmployeeController;
@@ -10,11 +11,11 @@ use App\Http\Controllers\AdminPortal\HRM\AttendanceController;
 use App\Http\Controllers\AdminPortal\HRM\DesignationController;
 use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
 use App\Http\Controllers\AdminPortal\Product\ProductsController;
-use App\Http\Controllers\AdminPortal\Department\DepartmentController;
 use App\Http\Controllers\AdminPortal\Inventory\CustomerController;
-use App\Http\Controllers\AdminPortal\Inventory\StockAdjustmentController;
 use App\Http\Controllers\AdminPortal\Inventory\WarehouseController;
+use App\Http\Controllers\AdminPortal\Department\DepartmentController;
 use App\Http\Controllers\AdminPortal\Production\ProductionController;
+use App\Http\Controllers\AdminPortal\Inventory\StockAdjustmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,17 @@ Route::middleware(['auth:sanctum'])
         Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('delete');
         Route::post('/server-side-users', [UserController::class, 'serverSideAllUsers'])->name('server-side-users');
     });
+
+Route::middleware(['auth'])
+->prefix('roles')
+->name('roles.')
+->group(function () {
+    Route::get('/', [RoleController::class, 'index'])->name('all');
+    Route::post('/add', [RoleController::class, 'add'])->name('add');
+    Route::post('/update', [RoleController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [RoleController::class, 'delete'])->name('delete');
+    Route::post('/server-side-data', [RoleController::class, 'serverSideAllRoles'])->name('server-side-data');
+});
 
 Route::middleware(['auth:sanctum'])
     ->prefix('departments')
