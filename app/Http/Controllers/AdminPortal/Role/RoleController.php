@@ -107,8 +107,8 @@ class RoleController extends Controller
                     </form>
                     </a> </div>';
 
-                $permissions = '<a href="' . url('/permissions', [$role->id]) . '" class="text-success fs-6 fw-bold">
-                     Permissions
+                $permissions = '<a href="' . url('roles/permissions', [$role->id]) . '" class="text-success fs-6 fw-bold">
+                     Set Permissions
                      </a>';
 
                 $td = [];

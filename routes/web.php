@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminPortal\HRM\PayrollController;
 use App\Http\Controllers\AdminPortal\HRM\EmployeeController;
 use App\Http\Controllers\AdminPortal\HRM\AttendanceController;
 use App\Http\Controllers\AdminPortal\HRM\DesignationController;
+use App\Http\Controllers\AdminPortal\Role\PermissionController;
 use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
 use App\Http\Controllers\AdminPortal\Product\ProductsController;
 use App\Http\Controllers\AdminPortal\Inventory\CustomerController;
@@ -80,6 +81,14 @@ Route::middleware(['auth'])
     Route::post('/update', [RoleController::class, 'update'])->name('update');
     Route::delete('/delete/{id}', [RoleController::class, 'delete'])->name('delete');
     Route::post('/server-side-data', [RoleController::class, 'serverSideAllRoles'])->name('server-side-data');
+});
+
+Route::middleware(['auth'])
+->prefix('permissions')
+->name('permissions.')
+->group(function () {
+    Route::get('/{id}', [PermissionController::class, 'permissions'])->name('permissions');
+    Route::post('/update', [PermissionController::class, 'updatePermission'])->name('update');
 });
 
 Route::middleware(['auth:sanctum'])
