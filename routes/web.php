@@ -73,23 +73,24 @@ Route::middleware(['auth:sanctum'])
     });
 
 Route::middleware(['auth'])
-->prefix('roles')
-->name('roles.')
-->group(function () {
-    Route::get('/', [RoleController::class, 'index'])->name('all');
-    Route::post('/add', [RoleController::class, 'add'])->name('add');
-    Route::post('/update', [RoleController::class, 'update'])->name('update');
-    Route::delete('/delete/{id}', [RoleController::class, 'delete'])->name('delete');
-    Route::post('/server-side-data', [RoleController::class, 'serverSideAllRoles'])->name('server-side-data');
-});
+    ->prefix('roles')
+    ->name('roles.')
+    ->group(function () {
+        Route::get('/', [RoleController::class, 'index'])->name('all');
+        Route::post('/add', [RoleController::class, 'add'])->name('add');
+        Route::post('/update', [RoleController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [RoleController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [RoleController::class, 'serverSideAllRoles'])->name('server-side-data');
+
+        Route::get('permissions/{id}', [PermissionController::class, 'permissions'])->name('permissions');
+    });
 
 Route::middleware(['auth'])
-->prefix('permissions')
-->name('permissions.')
-->group(function () {
-    Route::get('/{id}', [PermissionController::class, 'permissions'])->name('permissions');
-    Route::post('/update', [PermissionController::class, 'updatePermission'])->name('update');
-});
+    ->prefix('permissions')
+    ->name('permissions.')
+    ->group(function () {
+        Route::post('/update', [PermissionController::class, 'updatePermission'])->name('update');
+    });
 
 Route::middleware(['auth:sanctum'])
     ->prefix('departments')

@@ -23,25 +23,25 @@ class PermissionController extends Controller
         $data['pageSubTitle'] = "All Permissions";
 
         return view('theme.admin_portal.roles.all_permissions', $data);
-
-        // $permission = Role::findOrFail($id);
-        // return view('theme.roles.all_permissions', ['permission' => $permission]);
     }
 
     public function updatePermission(Request $request)
     {
+        
         $role = $request->role;
         $permissionName = $request->permission;
-
-        $permissionRes = Permission::where('name', '=', $permissionName)->count();
+        
+        $permissionRes = Permission::where('name', '=', $permissionName)->count();        
+        
         if ($permissionRes <= 0) { //if not exist
-            $permission = Permission::create(['name' => $permissionName]); //create permission in db
+            $permission = Permission::create(['name' => $permissionName, 'guard_name' => 'sanctum']); //create permission in db
         } else {
             $permission = Permission::getPermissions(['name' => $permissionName])->first();
         }
 
         $role = Role::find($role);
         $roleHasPermission = $role->hasPermissionTo($permissionName);
+
         if ($roleHasPermission) {
             $role->revokePermissionTo($permissionName);
         } else {

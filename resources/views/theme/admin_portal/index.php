@@ -191,6 +191,16 @@
           </li>
 
 
+          
+          <!-- customers -->
+          <li class="menu-item <?php echo request()->is('customers') ? 'active' : ''; ?>">
+            <a href="<?php echo url('customers'); ?>" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-collection"></i>
+              <div data-i18n="Basic">Customers</div>
+            </a>
+          </li>
+
+
           <li class="menu-item <?php echo request()->is('employees*', 'designations', 'attendances', 'holidays', 'leaves') ? 'active open' : ''; ?>">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bx-layout"></i>
