@@ -34,33 +34,33 @@ Route::get('/', function () {
 });
 
 // after login
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
         return view('theme.admin_portal.index');
     })->name('home');
 });
 
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return redirect('/home');
     });
 });
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return redirect('/home');
     })->name('dashboard');
 });
 
-// Route::middleware(['auth:sanctum'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
 //     Route::get('/dashboard', function () {
 //         return view('dashboard');
 //     })->name('dashboard');
 // });
 
 
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('users')
     ->name('users.')
     ->group(function () {
@@ -92,7 +92,7 @@ Route::middleware(['auth'])
         Route::post('/update', [PermissionController::class, 'updatePermission'])->name('update');
     });
 
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('departments')
     ->name('departments.')
     ->group(function () {
@@ -105,7 +105,7 @@ Route::middleware(['auth:sanctum'])
     });
 
 
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('employees')
     ->name('employees.')
     ->group(function () {
@@ -118,7 +118,7 @@ Route::middleware(['auth:sanctum'])
     });
 
 
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('designations')
     ->name('designations.')
     ->group(function () {
@@ -131,7 +131,7 @@ Route::middleware(['auth:sanctum'])
     });
 
 
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('attendances')
     ->name('attendances.')
     ->group(function () {
@@ -144,7 +144,7 @@ Route::middleware(['auth:sanctum'])
     });
 
 
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('holidays')
     ->name('holidays.')
     ->group(function () {
@@ -156,7 +156,7 @@ Route::middleware(['auth:sanctum'])
         Route::post('/server-side-data', [HolidayController::class, 'serverSideAllHolidays'])->name('server-side-data');
     });
 
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('leaves')
     ->name('leaves.')
     ->group(function () {
@@ -169,7 +169,7 @@ Route::middleware(['auth:sanctum'])
     });
 
 
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('payrolls')
     ->name('payrolls.')
     ->group(function () {
@@ -181,7 +181,7 @@ Route::middleware(['auth:sanctum'])
         Route::post('/server-side-data', [PayrollController::class, 'serverSideAllPayrolls'])->name('server-side-data');
     });
 
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('products')
     ->name('products.')
     ->group(function () {
@@ -194,7 +194,7 @@ Route::middleware(['auth:sanctum'])
     });
 
 
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('productions')
     ->name('productions.')
     ->group(function () {
@@ -211,7 +211,7 @@ Route::middleware(['auth:sanctum'])
 
 //*********** inventory *************
 // warehouse
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('warehouses')
     ->name('warehouses.')
     ->group(function () {
@@ -225,7 +225,7 @@ Route::middleware(['auth:sanctum'])
 
 
 // customer
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('customers')
     ->name('customers.')
     ->group(function () {
@@ -239,7 +239,7 @@ Route::middleware(['auth:sanctum'])
 
 
 // customer
-Route::middleware(['auth:sanctum'])
+Route::middleware(['auth'])
     ->prefix('stocks')
     ->name('stocks.')
     ->group(function () {

@@ -15,16 +15,8 @@
                     <div class="form-group">
                         <label class="form-label fs-7">Role</label>
                         <select class="form-control form-control-md" name="role">
-                            <?php if ($userData->role == 1) { ?>
-                                <option selected value="1">Admin (*)</option>
-                            <?php } else if ($userData->role == 2) { ?>
-                                <option selected value="2">Staff (*)</option>
-                            <?php } else { ?>
-                                <option selected value="">N/A (*)</option>
-                            <?php } ?>
                             <option>Select An Option</option>
                             <option value="1">Admin</option>
-                            <option value="2">Staff</option>
                         </select>
                     </div>
                 </div>

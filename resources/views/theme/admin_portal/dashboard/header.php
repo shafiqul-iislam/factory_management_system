@@ -51,6 +51,11 @@
   <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
+
+      <?php
+      $authUserData = auth()->user();
+      $getPermissions = getPermissions();
+      ?>
       <!-- Menu -->
 
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -101,7 +106,9 @@
         <div class="menu-inner-shadow"></div>
 
         <ul class="menu-inner py-1">
+
           <!-- Dashboard -->
+
           <li class="menu-item">
             <a href="<?php echo url('home'); ?>" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
@@ -109,13 +116,16 @@
             </a>
           </li>
 
+
           <!-- departments -->
-          <li class="menu-item <?php echo request()->is('departments') ? 'active' : ''; ?>">
-            <a href="<?php echo url('departments'); ?>" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Departments/Sections</div>
-            </a>
-          </li>
+          <?php if (checkPermission($getPermissions, 'department_module')) { ?>
+            <li class="menu-item <?php echo request()->is('departments') ? 'active' : ''; ?>">
+              <a href="<?php echo url('departments'); ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Departments/Sections</div>
+              </a>
+            </li>
+          <?php } ?>
 
           <!-- roles -->
           <li class="menu-item <?php echo request()->is('roles') ? 'active' : ''; ?>">

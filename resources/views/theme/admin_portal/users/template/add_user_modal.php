@@ -17,7 +17,6 @@
                                 <select class="form-control form-control-md" name="role">
                                     <option>Select An Option</option>
                                     <option value="1">Admin</option>
-                                    <option value="2">Staff</option>
                                 </select>
                             </div>
                         </div>
@@ -27,7 +26,6 @@
                                 <select class="form-control form-control-md" name="profile_type">
                                     <option>Select An Option</option>
                                     <option value="1">Admin</option>
-                                    <option value="2">Staff</option>
                                 </select>
                             </div>
                         </div>

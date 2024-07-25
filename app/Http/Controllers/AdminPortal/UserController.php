@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminPortal;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
@@ -46,8 +47,11 @@ class UserController extends Controller
             $addUser->created_by_username = $loginUserData->name;
             $response = $addUser->save();
 
+            // $roleData = Role::find($request->role);
+            // $addUser->assignRole($roleData->name);
+
             if ($response) {
-                return redirect('/users')->with('success', 'Successfuly Added');
+                return redirect('/users')->with('success', 'Successfully Added');
             } else {
                 return redirect('/users')->with('error', 'Oops Something Wrong');
             }
@@ -83,6 +87,9 @@ class UserController extends Controller
             $updateUser->address = $request->address;
             $updateUser->profile_status = ($request->profile_status == 'on') ? 1 : 0;
             $response = $updateUser->save();
+
+            // $roleData = Role::find($request->role);
+            // $updateUser->assignRole($roleData->name);
 
             if ($response) {
                 return redirect('/users')->with('success', 'Successfuly Updated');

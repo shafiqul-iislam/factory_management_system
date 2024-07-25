@@ -7,7 +7,7 @@
     <div class="card-header border-bottom d-flex align-items-center justify-content-between">
         <h4 class="card-title">Roles</h4>
         <div class="card-toolbar">
-            <button type="button" class="btn btn-primary btn-md me-3 fs-6" data-bs-toggle="modal" data-bs-target=".update_role_modal">
+            <button type="button" class="btn btn-primary btn-md me-3 fs-6" data-bs-toggle="modal" data-bs-target=".add_role_modal">
                 Add Role
             </button>
         </div>
