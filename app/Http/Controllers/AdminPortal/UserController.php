@@ -47,8 +47,8 @@ class UserController extends Controller
             $addUser->created_by_username = $loginUserData->name;
             $response = $addUser->save();
 
-            // $roleData = Role::find($request->role);
-            // $addUser->assignRole($roleData->name);
+            $roleData = Role::find($request->role);
+            $addUser->assignRole($roleData->name);
 
             if ($response) {
                 return redirect('/users')->with('success', 'Successfully Added');

@@ -5,6 +5,47 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
+
+// if (!function_exists('getPermissions')) {
+//     function getPermissions($rolename = null)
+//     {
+
+//         //default loggedin rolename
+//         $role = Auth::user()->role;
+
+//         //cehck if rolename passed or exists
+//         if (isset($rolename) && !empty($rolename)) {
+//             $role = $rolename;
+//         }
+
+//         if (isset($role) && !empty($role)) {
+//             $permissions = Role::find($role)->permissions;
+//             $permissionNames = [];
+//             foreach ($permissions as $permission) {
+//                 $permissionNames[$permission->name] = $permission->name;
+//             }
+
+//             return $permissionNames;
+//         }
+
+//         return [];
+//     }
+// }
+
+// if (!function_exists('checkPermission')) {
+//     function checkPermission(array $userPermissions, string $permissionName)
+//     {
+//         // emergency only
+//         // return TRUE;
+
+//         if (is_array($userPermissions) && array_key_exists($permissionName, $userPermissions)) {
+//             return true;
+//         }
+
+//         return false;
+//     }
+// }
+
 if (!function_exists('getPermissions')) {
     function getPermissions($roleName = null)
     {

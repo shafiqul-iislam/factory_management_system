@@ -34,7 +34,7 @@ class PermissionController extends Controller
         $permissionRes = Permission::where('name', '=', $permissionName)->count();        
         
         if ($permissionRes <= 0) { //if not exist
-            $permission = Permission::create(['name' => $permissionName, 'guard_name' => 'sanctum']); //create permission in db
+            $permission = Permission::create(['name' => $permissionName]); //create permission in db
         } else {
             $permission = Permission::getPermissions(['name' => $permissionName])->first();
         }

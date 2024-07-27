@@ -54,7 +54,7 @@
 
       <?php
       $authUserData = auth()->user();
-      $getPermissions = getPermissions();
+      $userRolePermissions = getPermissions();
       ?>
       <!-- Menu -->
 
@@ -118,7 +118,7 @@
 
 
           <!-- departments -->
-          <?php if (checkPermission($getPermissions, 'department_module')) { ?>
+          <?php if (checkPermission($userRolePermissions, 'department_module')) { ?>
             <li class="menu-item <?php echo request()->is('departments') ? 'active' : ''; ?>">
               <a href="<?php echo url('departments'); ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>

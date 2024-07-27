@@ -171,6 +171,8 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+
+        Spatie\Permission\PermissionServiceProvider::class,
     ])->toArray(),
 
     /*
