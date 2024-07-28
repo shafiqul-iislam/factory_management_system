@@ -47,8 +47,8 @@ class UserController extends Controller
             $addUser->created_by_username = $loginUserData->name;
             $response = $addUser->save();
 
-            $roleData = Role::find($request->role);
-            $addUser->assignRole($roleData->name);
+            // $roleData = Role::find($request->role);
+            // $addUser->assignRole($roleData->name);
 
             if ($response) {
                 return redirect('/users')->with('success', 'Successfully Added');
@@ -88,11 +88,11 @@ class UserController extends Controller
             $updateUser->profile_status = ($request->profile_status == 'on') ? 1 : 0;
             $response = $updateUser->save();
 
-            // $roleData = Role::find($request->role);
-            // $updateUser->assignRole($roleData->name);
+            $roleData = Role::find($request->role);
+            $updateUser->assignRole($roleData->name);
 
             if ($response) {
-                return redirect('/users')->with('success', 'Successfuly Updated');
+                return redirect('/users')->with('success', 'Successfully Updated');
             } else {
                 return redirect('/users')->with('error', 'Oops Something Wrong');
             }

@@ -14,8 +14,11 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'web', // default web for browser session
         'passwords' => 'users',
+
+        // 'guard' => 'sanctum', // optinal but can not use two defualt guards sanctum guard for api use and also role and permissions
+        // 'passwords' => 'users',
     ],
 
     /*
@@ -41,7 +44,7 @@ return [
             'provider' => 'users',
         ],
 
-        'api' => [
+        'sanctum' => [
             'driver' => 'sanctum',
             'provider' => 'users',
         ],

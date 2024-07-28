@@ -92,15 +92,15 @@ Route::middleware(['auth'])
         Route::post('/update', [PermissionController::class, 'updatePermission'])->name('update');
     });
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'permission:department_module'])
     ->prefix('departments')
     ->name('departments.')
     ->group(function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('all');
-        Route::post('/add', [DepartmentController::class, 'add'])->name('add');
-        Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('edit');
-        Route::post('/update', [DepartmentController::class, 'update'])->name('update');
-        Route::delete('/delete/{id}', [DepartmentController::class, 'delete'])->name('delete');
+        Route::middleware(['permission:department_add'])->post('/add', [DepartmentController::class, 'add'])->name('add');
+        Route::middleware(['permission:department_edit'])->get('/edit/{id}', [DepartmentController::class, 'edit'])->name('edit');
+        Route::middleware(['permission:department_update'])->post('/update', [DepartmentController::class, 'update'])->name('update');
+        Route::middleware(['permission:department_delete'])->delete('/delete/{id}', [DepartmentController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [DepartmentController::class, 'serverSideAllDepartments'])->name('server-side-data');
     });
 

@@ -29,7 +29,7 @@ class RoleController extends Controller
 
             $addRole = new Role;
             $addRole->name = strtolower($request->name);
-            // $addRole->guard_name = 'sanctum';
+            $addRole->guard_name = 'sanctum';
             $response = $addRole->save();
 
             if ($response) {
