@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminPortal\HRM\EmployeeController;
 use App\Http\Controllers\AdminPortal\HRM\AttendanceController;
 use App\Http\Controllers\AdminPortal\HRM\DesignationController;
 use App\Http\Controllers\AdminPortal\Role\PermissionController;
+use App\Http\Controllers\CustomerPortal\CustomerAuthController;
 use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
 use App\Http\Controllers\AdminPortal\Product\ProductsController;
 use App\Http\Controllers\AdminPortal\Inventory\CustomerController;
@@ -238,7 +239,7 @@ Route::middleware(['auth'])
     });
 
 
-// customer
+// stock adjustment
 Route::middleware(['auth'])
     ->prefix('stocks')
     ->name('stocks.')
@@ -254,4 +255,12 @@ Route::middleware(['auth'])
 
 
 
-    // ############# need to add balance module ##############
+// ############# need to add balance module ##############
+
+
+################## cutomer portal ##############################
+
+Route::middleware(['guest'])
+    ->group(function () {
+        Route::get('/customer-login', [CustomerAuthController::class, 'auth'])->name('customer-login');
+    });
