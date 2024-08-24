@@ -13,7 +13,11 @@ class CustomerAuthController extends Controller
 
     public function auth()
     {
-        return view('auth.customer.login');
+        if (Auth::guard('customer')->check()) {
+            return redirect()->back()->with('error', 'Already Logged In');
+        } else {
+            return view('auth.customer.login');
+        }
     }
 
     // customer login
@@ -50,7 +54,11 @@ class CustomerAuthController extends Controller
     // customer register
     public function customerSignup()
     {
-        return view('auth.customer.register');
+        if (Auth::guard('customer')->check()) {
+            return redirect()->back()->with('error', 'Already Logged In');
+        } else {
+            return view('auth.customer.register');
+        }
     }
 
     // customer register

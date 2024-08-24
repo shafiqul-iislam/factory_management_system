@@ -12,8 +12,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-  <title>Admin Portal</title>
+  <meta name="viewport" contzent="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <title>Customer Portal</title>
   <meta name="description" content="" />
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="<?php echo asset('/theme/assets/img/favicon/favicon.ico'); ?>" />
@@ -48,16 +48,16 @@
 </head>
 
 <body>
+
+  <?php
+
+  $loginCustomerData = auth('customer')->user();
+
+  ?>
   <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
-
-      <?php
-      $authUserData = auth()->user();
-      $userRolePermissions = getPermissions();
-      ?>
       <!-- Menu -->
-
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo">
           <a href="index.html" class="app-brand-link">
@@ -106,7 +106,6 @@
         <div class="menu-inner-shadow"></div>
 
         <ul class="menu-inner py-1">
-
           <!-- Dashboard -->
 
           <li class="menu-item">
@@ -116,195 +115,12 @@
             </a>
           </li>
 
-
-          <!-- departments -->
-          <?php if (checkPermission($userRolePermissions, 'department_module')) { ?>
-            <li class="menu-item <?php echo request()->is('departments') ? 'active' : ''; ?>">
-              <a href="<?php echo url('departments'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Departments/Sections</div>
-              </a>
-            </li>
-          <?php } ?>
-
-          <!-- roles -->
-          <li class="menu-item <?php echo request()->is('roles') ? 'active' : ''; ?>">
-            <a href="<?php echo url('roles'); ?>" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Role</div>
-            </a>
-          </li>
-
-          <!-- users -->
-          <li class="menu-item <?php echo request()->is('users') ? 'active' : ''; ?>">
-            <a href="<?php echo url('users'); ?>" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Users</div>
-            </a>
-          </li>
-
-          <!-- hrm -->
-          <li class="menu-item <?php echo request()->is('employees*', 'designations', 'attendances', 'holidays', 'leaves') ? 'active open' : ''; ?>">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Layouts">HRM</div>
-            </a>
-
-            <ul class="menu-sub">
-              <li class="menu-item <?php echo request()->is('employees') ? 'active' : ''; ?>">
-                <a href="<?php echo url('employees'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Employees</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('designations') ? 'active' : ''; ?>">
-                <a href="<?php echo url('designations'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Designations</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('attendances') ? 'active' : ''; ?>">
-                <a href="<?php echo url('attendances'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Attendance</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('holidays') ? 'active' : ''; ?>">
-                <a href="<?php echo url('holidays'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Holidays</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('leaves') ? 'active' : ''; ?>">
-                <a href="<?php echo url('leaves'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Leave Request</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('payrolls') ? 'active' : ''; ?>">
-                <a href="<?php echo url('payrolls'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Payroll</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- products -->
-          <li class="menu-item <?php echo request()->is('products') ? 'active' : ''; ?>">
-            <a href="<?php echo url('products'); ?>" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Products</div>
-            </a>
-          </li>
-
-          <!-- production -->
-          <li class="menu-item <?php echo request()->is('production') ? 'active' : ''; ?>">
-            <a href="<?php echo url('production'); ?>" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Production</div>
-            </a>
-          </li>
-
-          <!-- production -->
-          <li class="menu-item <?php echo request()->is('customers') ? 'active' : ''; ?>">
-            <a href="<?php echo url('customers'); ?>" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Customers</div>
-            </a>
-          </li>
-
-
-          <li class="menu-item <?php echo request()->is('employees*', 'designations', 'attendances', 'holidays', 'leaves') ? 'active open' : ''; ?>">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Layouts">Inventory</div>
-            </a>
-
-            <ul class="menu-sub">
-              <li class="menu-item <?php echo request()->is('employees') ? 'active' : ''; ?>">
-                <a href="<?php echo url('employees'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Employees</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('designations') ? 'active' : ''; ?>">
-                <a href="<?php echo url('designations'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Designations</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('attendances') ? 'active' : ''; ?>">
-                <a href="<?php echo url('attendances'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Attendance</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Layouts -->
-          <!-- <li class="menu-item <?php echo request()->is('patients') ? 'show' : ''; ?>">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Patients</div>
-              </a>
-
-              <ul class="menu-sub">
-                <li class="menu-item <?php echo request()->is('patients') ? 'active' : ''; ?>">
-                  <a href="<?php echo url('patients'); ?>" class="menu-link">
-                    <div data-i18n="Without menu">Patients</div>
-                  </a>
-                </li>
-                <li class="menu-item <?php echo request()->is('payments') ? 'active' : ''; ?>">
-                  <a href="<?php echo url('payments'); ?>" class="menu-link">
-                    <div data-i18n="Without menu">Payments</div>
-                  </a>
-                </li>
-              </ul>
-            </li> -->
-
-          <!-- Layouts -->
           <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Layouts">Layouts</div>
+            <a href="<?php echo url('customer-logout'); ?>" class="menu-link">
+              <i class="bx bx-power-off me-2"></i>
+              <div data-i18n="Analytics">Logout</div>
             </a>
-
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="layouts-without-menu.html" class="menu-link">
-                  <div data-i18n="Without menu">Without menu</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="layouts-without-navbar.html" class="menu-link">
-                  <div data-i18n="Without navbar">Without navbar</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="layouts-container.html" class="menu-link">
-                  <div data-i18n="Container">Container</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="layouts-fluid.html" class="menu-link">
-                  <div data-i18n="Fluid">Fluid</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="layouts-blank.html" class="menu-link">
-                  <div data-i18n="Blank">Blank</div>
-                </a>
-              </li>
-            </ul>
           </li>
-
-          <li class="menu-item">
-            <form method="POST" action="<?php echo route('logout'); ?>">
-              <?php //echo csrf_field(); 
-              ?>
-              <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
-
-              <button type="submit" class="menu-link btn btn-sm">
-                <i class="bx bx-power-off me-2"></i>
-                <span class="align-middle">Logout</span>
-              </button>
-            </form>
-          </li>
-
-
         </ul>
       </aside>
       <!-- / Menu -->
@@ -340,8 +156,8 @@
                         </div>
                       </div>
                       <div class="flex-grow-1">
-                        <span class="fw-semibold d-block">John Doe</span>
-                        <small class="text-muted">Admin</small>
+                        <span class="fw-semibold d-block"><?php echo $loginCustomerData->name; ?></span>
+                        <small class="text-muted">Customer</small>
                       </div>
                     </div>
                   </a>
@@ -356,34 +172,13 @@
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
-                    <i class="bx bx-cog me-2"></i>
-                    <span class="align-middle">Settings</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    <span class="d-flex align-items-center align-middle">
-                      <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                      <span class="flex-grow-1 align-middle">Billing</span>
-                      <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                    </span>
-                  </a>
-                </li>
-                <li>
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <form method="POST" action="<?php echo route('logout'); ?>">
-                    <?php //echo csrf_field(); 
-                    ?>
-                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
-
-                    <button type="submit" class="dropdown-item btn btn-sm">
-                      <i class="bx bx-power-off me-2"></i>
-                      <span class="align-middle fs-6">Logout</span>
-                    </button>
-                  </form>
+                  <a class="dropdown-item" href="<?php echo url('customer-logout'); ?>">
+                    <i class="bx bx-power-off me-2"></i>
+                    <span class="align-middle">Logout</span>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -394,5 +189,4 @@
         <!-- Content wrapper -->
         <div class="content-wrapper">
           <!-- Content -->
-
           <div class="container-xxl flex-grow-1 container-p-y">

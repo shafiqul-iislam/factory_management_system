@@ -33,8 +33,8 @@
     </div>
 </div>
 
-<?php include(resource_path('/views/theme/admin_portal/dashboard/footer.php')) ?>
-<?php include(resource_path('/views/theme/admin_portal/departments/template/add_department_modal.php')) ?>
+<?php include(resource_path('/views/theme/admin_portal/dashboard/footer.php')); ?>
+<?php include(resource_path('/views/theme/admin_portal/departments/template/add_department_modal.php')); ?>
 
 <script>
     $(document).ready(function() {

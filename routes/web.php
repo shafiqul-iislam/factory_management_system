@@ -271,7 +271,10 @@ Route::middleware(['guest'])
     });
 
 
-Route::get('/customer-logout', [CustomerAuthController::class, 'authLogout'])->name('customer-logout');
+Route::middleware(['auth:customer'])
+    ->group(function () {
+        Route::get('/customer-logout', [CustomerAuthController::class, 'authLogout'])->name('customer-logout');
+    });
 
 
 Route::middleware(['auth:customer'])->prefix('customer-portal')
