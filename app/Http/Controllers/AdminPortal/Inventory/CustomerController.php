@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminPortal\Inventory;
 use Illuminate\Http\Request;
 use App\Models\Customer\Customer;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
@@ -20,6 +21,7 @@ class CustomerController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'email' => 'required',
+            'password' => 'required',
             'address' => 'required',
         ]);
 
@@ -33,6 +35,7 @@ class CustomerController extends Controller
             $addCustomer->name = $request->name;
             $addCustomer->phone = $request->phone;
             $addCustomer->email = $request->email;
+            $addCustomer->password = Hash::make($request->password);
             $addCustomer->address = $request->address;
             $addCustomer->note = $request->note;
 

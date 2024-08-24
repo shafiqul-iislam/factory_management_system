@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminPortal\HRM\AttendanceController;
 use App\Http\Controllers\AdminPortal\HRM\DesignationController;
 use App\Http\Controllers\AdminPortal\Role\PermissionController;
 use App\Http\Controllers\CustomerPortal\CustomerAuthController;
+use App\Http\Controllers\CustomerPortal\CustomerHomeController;
 use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
 use App\Http\Controllers\AdminPortal\Product\ProductsController;
 use App\Http\Controllers\AdminPortal\Inventory\CustomerController;
@@ -262,5 +263,19 @@ Route::middleware(['auth'])
 
 Route::middleware(['guest'])
     ->group(function () {
-        Route::get('/customer-login', [CustomerAuthController::class, 'auth'])->name('customer-login');
+        Route::get('/customer-login', [CustomerAuthController::class, 'auth']);
+        Route::post('/customer-login', [CustomerAuthController::class, 'authLogin'])->name('customer-login');
+
+        Route::get('/customer-signup', [CustomerAuthController::class, 'customerSignup']);
+        Route::post('/customer-signup', [CustomerAuthController::class, 'customerSignupStore'])->name('customer-signup');
+    });
+
+
+Route::get('/customer-logout', [CustomerAuthController::class, 'authLogout'])->name('customer-logout');
+
+
+Route::middleware(['auth:customer'])->prefix('customer-portal')
+    ->name('customer-portal.')
+    ->group(function () {
+        Route::get('/home', [CustomerHomeController::class, 'index'])->name('home');
     });

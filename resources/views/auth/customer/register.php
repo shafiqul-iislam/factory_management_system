@@ -12,7 +12,7 @@
 =========================================================
  -->
 <!-- beautify ignore:start -->
-<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="" <?php echo asset('theme/assets/'); ?>" data-template="vertical-menu-template-free">
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="<?php echo asset('theme/assets/'); ?>" data-template="vertical-menu-template-free">
 
 <head>
     <meta charset="utf-8" />
@@ -115,12 +115,20 @@
                                 </div>
                                 <!-- /Logo -->
 
-                                <h4 class="mb-2 text-center">Customer Login</h4>
+                                <h4 class="mb-2 text-center">Customer Sign Up</h4>
 
-                                <form class="mb-3" action="<?php echo url('customer-login'); ?>" method="POST">
+                                <form class="mb-3" action="<?php echo url('customer-signup'); ?>" method="POST">
                                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                                     <div class="mb-3">
-                                        <label for="email" class="form-label">Email or Username</label>
+                                        <label for="name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" class="form-control" name="username" placeholder="Enter Username">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
                                         <input type="email" class="form-control" name="email" placeholder="Enter Email">
                                     </div>
 
@@ -135,21 +143,15 @@
                                             <input type="password" name="password" placeholder="Enter Password" class="form-control">
                                         </div>
                                     </div>
-                                    <!-- <div class="mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="remember-me" />
-                                            <label class="form-check-label" for="remember-me"> Remember Me </label>
-                                        </div>
-                                    </div> -->
                                     <div class="mb-3">
-                                        <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                                        <button class="btn btn-primary d-grid w-100" type="submit">Sign Up</button>
                                     </div>
                                 </form>
 
                                 <p class="text-center">
-                                    <span>New on our platform?</span>
-                                    <a href="<?php echo url('customer-signup'); ?>">
-                                        <span>Create an account</span>
+                                    <span>Already have an account?</span>
+                                    <a href="<?php echo url('customer-login'); ?>">
+                                        <span>Sign in</span>
                                     </a>
                                 </p>
                             </div>

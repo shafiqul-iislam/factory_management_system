@@ -35,19 +35,25 @@
                     <div class="row d-flex justify-content-center mb-3">
                         <div class="col-lg-6">
                             <div class="form-group">
+                                <label class="required fw-bold fs-7 mb-1">Password</label>
+                                <input type="password" name="password" class="form-control form-control-solid" placeholder="Enter Password" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
                                 <label class="required fw-bold fs-7 mb-1">Phone</label>
                                 <input type="text" name="phone" class="form-control form-control-solid" placeholder="Enter Phone" required>
                             </div>
                         </div>
+                    </div>
+                    <div class="row d-flex justify-content-center mb-3">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="required fw-bold fs-7 mb-1">Address</label>
                                 <input type="text" name="address" class="form-control form-control-solid" placeholder="Enter Address" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="row d-flex justify-content-center mb-3">
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="form-label fw-bold fs-7 mb-1">Note</label>
                                 <textarea class="form-control form-control-solid" name="note" rows="1" placeholder="Enter Note"></textarea>
