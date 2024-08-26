@@ -385,12 +385,11 @@
     </div>
 </div>
 
-
 <?php include(resource_path('/views/theme/admin_portal/dashboard/footer.php')) ?>
 
 <script>
     $(document).ready(function() {
-        var role = <?php echo $role->id ?>;
+        var role = <?php echo $role->id; ?>;
 
         $('input').on('click', function() {
             var permission = $(this).attr('name');

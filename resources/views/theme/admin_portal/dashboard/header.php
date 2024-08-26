@@ -157,7 +157,6 @@
               </a>
 
               <ul class="menu-sub">
-
                 <?php if (checkPermission($userRolePermissions, 'employee_module')) { ?>
                   <li class="menu-item <?php echo request()->is('employees') ? 'active' : ''; ?>">
                     <a href="<?php echo url('employees'); ?>" class="menu-link">
@@ -177,7 +176,7 @@
                 <?php if (checkPermission($userRolePermissions, 'attendance_module')) { ?>
                   <li class="menu-item <?php echo request()->is('attendances') ? 'active' : ''; ?>">
                     <a href="<?php echo url('attendances'); ?>" class="menu-link">
-                      <div data-i18n="Without menu">Attendance</div>
+                      <div data-i18n="Without menu">Attendances</div>
                     </a>
                   </li>
                 <?php } ?>
@@ -323,7 +322,6 @@
               <?php //echo csrf_field(); 
               ?>
               <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
-
               <button type="submit" class="menu-link btn btn-sm">
                 <i class="bx bx-power-off me-2"></i>
                 <span class="align-middle">Logout</span>

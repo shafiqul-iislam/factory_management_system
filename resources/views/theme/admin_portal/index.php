@@ -252,7 +252,7 @@
               </li>
               <li class="menu-item <?php echo request()->is('attendances') ? 'active' : ''; ?>">
                 <a href="<?php echo url('attendances'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Attendance</div>
+                  <div data-i18n="Without menu">Attendances</div>
                 </a>
               </li>
             </ul>
