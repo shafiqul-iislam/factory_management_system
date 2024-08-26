@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
 // });
 
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'permission:user_module'])
     ->prefix('users')
     ->name('users.')
     ->group(function () {
@@ -74,7 +74,7 @@ Route::middleware(['auth'])
         Route::post('/server-side-users', [UserController::class, 'serverSideAllUsers'])->name('server-side-users');
     });
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'permission:role_module'])
     ->prefix('roles')
     ->name('roles.')
     ->group(function () {
@@ -107,7 +107,7 @@ Route::middleware(['auth', 'permission:department_module'])
     });
 
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'permission:employee_module'])
     ->prefix('employees')
     ->name('employees.')
     ->group(function () {
@@ -120,7 +120,7 @@ Route::middleware(['auth'])
     });
 
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'permission:designation_module'])
     ->prefix('designations')
     ->name('designations.')
     ->group(function () {
@@ -133,7 +133,7 @@ Route::middleware(['auth'])
     });
 
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'permission:attendance_module'])
     ->prefix('attendances')
     ->name('attendances.')
     ->group(function () {
@@ -146,7 +146,7 @@ Route::middleware(['auth'])
     });
 
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'permission:holiday_module'])
     ->prefix('holidays')
     ->name('holidays.')
     ->group(function () {
@@ -158,7 +158,7 @@ Route::middleware(['auth'])
         Route::post('/server-side-data', [HolidayController::class, 'serverSideAllHolidays'])->name('server-side-data');
     });
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'permission:leave_request_module'])
     ->prefix('leaves')
     ->name('leaves.')
     ->group(function () {
@@ -171,7 +171,7 @@ Route::middleware(['auth'])
     });
 
 
-Route::middleware(['auth'])
+Route::middleware(['auth', 'permission:payroll_module'])
     ->prefix('payrolls')
     ->name('payrolls.')
     ->group(function () {
@@ -227,7 +227,7 @@ Route::middleware(['auth'])
 
 
 // customer
-Route::middleware(['auth'])
+Route::middleware(['auth', 'permission:customer_module'])
     ->prefix('customers')
     ->name('customers.')
     ->group(function () {

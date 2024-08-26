@@ -316,31 +316,31 @@
                     <div class="col-lg-4 mb-2 mb-lg-4 fv-row">
                         <h4>Leave Request</h4>
                         <div class="form-check form-check-custom form-check-solid mt-3">
-                            <input class="form-check-input h-25px w-25px" type="checkbox" name="user_module" id="flexCheckbox30" <?php echo (array_key_exists("user_module", $permissions)) ? 'checked' : ''; ?> />
+                            <input class="form-check-input h-25px w-25px" type="checkbox" name="leave_request_module" id="flexCheckbox30" <?php echo (array_key_exists("leave_request_module", $permissions)) ? 'checked' : ''; ?> />
                             <label class="form-check-label ps-1 fs-6" for="flexCheckbox30">
                                 Module
                             </label>
                         </div>
                         <div class="form-check form-check-custom form-check-solid mt-2">
-                            <input class="form-check-input h-25px w-25px" type="checkbox" name="user_add" id="flexCheckbox30" <?php echo (array_key_exists("user_add", $permissions)) ? 'checked' : ''; ?> />
+                            <input class="form-check-input h-25px w-25px" type="checkbox" name="leave_request_add" id="flexCheckbox30" <?php echo (array_key_exists("leave_request_add", $permissions)) ? 'checked' : ''; ?> />
                             <label class="form-check-label ps-1 fs-6" for="flexCheckbox30">
                                 Add
                             </label>
                         </div>
                         <div class="form-check form-check-custom form-check-solid mt-2">
-                            <input class="form-check-input h-25px w-25px" type="checkbox" name="user_delete" id="flexCheckbox30" <?php echo (array_key_exists("user_delete", $permissions)) ? 'checked' : ''; ?> />
+                            <input class="form-check-input h-25px w-25px" type="checkbox" name="leave_request_delete" id="flexCheckbox30" <?php echo (array_key_exists("leave_request_delete", $permissions)) ? 'checked' : ''; ?> />
                             <label class="form-check-label ps-1 fs-6" for="flexCheckbox30">
                                 Delete
                             </label>
                         </div>
                         <div class="form-check form-check-custom form-check-solid mt-2">
-                            <input class="form-check-input h-25px w-25px" type="checkbox" name="user_edit" id="flexCheckbox30" <?php echo (array_key_exists("user_edit", $permissions)) ? 'checked' : ''; ?> />
+                            <input class="form-check-input h-25px w-25px" type="checkbox" name="leave_request_edit" id="flexCheckbox30" <?php echo (array_key_exists("leave_request_edit", $permissions)) ? 'checked' : ''; ?> />
                             <label class="form-check-label ps-1 fs-6" for="flexCheckbox30">
                                 Edit
                             </label>
                         </div>
                         <div class="form-check form-check-custom form-check-solid mt-2">
-                            <input class="form-check-input h-25px w-25px" type="checkbox" name="user_update" id="flexCheckbox30" <?php echo (array_key_exists("user_update", $permissions)) ? 'checked' : ''; ?> />
+                            <input class="form-check-input h-25px w-25px" type="checkbox" name="leave_request_update" id="flexCheckbox30" <?php echo (array_key_exists("leave_request_update", $permissions)) ? 'checked' : ''; ?> />
                             <label class="form-check-label ps-1 fs-6" for="flexCheckbox30">
                                 Update
                             </label>
@@ -349,31 +349,31 @@
                     <div class="col-lg-4 fv-row">
                         <h4>Payroll</h4>
                         <div class="form-check form-check-custom form-check-solid mt-3">
-                            <input class="form-check-input h-25px w-25px" type="checkbox" name="user_module" id="flexCheckbox30" <?php echo (array_key_exists("user_module", $permissions)) ? 'checked' : ''; ?> />
+                            <input class="form-check-input h-25px w-25px" type="checkbox" name="payroll_module" id="flexCheckbox30" <?php echo (array_key_exists("payroll_module", $permissions)) ? 'checked' : ''; ?> />
                             <label class="form-check-label ps-1 fs-6" for="flexCheckbox30">
                                 Module
                             </label>
                         </div>
                         <div class="form-check form-check-custom form-check-solid mt-2">
-                            <input class="form-check-input h-25px w-25px" type="checkbox" name="user_add" id="flexCheckbox30" <?php echo (array_key_exists("user_add", $permissions)) ? 'checked' : ''; ?> />
+                            <input class="form-check-input h-25px w-25px" type="checkbox" name="payroll_add" id="flexCheckbox30" <?php echo (array_key_exists("payroll_add", $permissions)) ? 'checked' : ''; ?> />
                             <label class="form-check-label ps-1 fs-6" for="flexCheckbox30">
                                 Add
                             </label>
                         </div>
                         <div class="form-check form-check-custom form-check-solid mt-2">
-                            <input class="form-check-input h-25px w-25px" type="checkbox" name="user_delete" id="flexCheckbox30" <?php echo (array_key_exists("user_delete", $permissions)) ? 'checked' : ''; ?> />
+                            <input class="form-check-input h-25px w-25px" type="checkbox" name="payroll_delete" id="flexCheckbox30" <?php echo (array_key_exists("payroll_delete", $permissions)) ? 'checked' : ''; ?> />
                             <label class="form-check-label ps-1 fs-6" for="flexCheckbox30">
                                 Delete
                             </label>
                         </div>
                         <div class="form-check form-check-custom form-check-solid mt-2">
-                            <input class="form-check-input h-25px w-25px" type="checkbox" name="user_edit" id="flexCheckbox30" <?php echo (array_key_exists("user_edit", $permissions)) ? 'checked' : ''; ?> />
+                            <input class="form-check-input h-25px w-25px" type="checkbox" name="payroll_edit" id="flexCheckbox30" <?php echo (array_key_exists("payroll_edit", $permissions)) ? 'checked' : ''; ?> />
                             <label class="form-check-label ps-1 fs-6" for="flexCheckbox30">
                                 Edit
                             </label>
                         </div>
                         <div class="form-check form-check-custom form-check-solid mt-2">
-                            <input class="form-check-input h-25px w-25px" type="checkbox" name="user_update" id="flexCheckbox30" <?php echo (array_key_exists("user_update", $permissions)) ? 'checked' : ''; ?> />
+                            <input class="form-check-input h-25px w-25px" type="checkbox" name="payroll_update" id="flexCheckbox30" <?php echo (array_key_exists("payroll_update", $permissions)) ? 'checked' : ''; ?> />
                             <label class="form-check-label ps-1 fs-6" for="flexCheckbox30">
                                 Update
                             </label>

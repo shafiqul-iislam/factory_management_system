@@ -128,61 +128,86 @@
           <?php } ?>
 
           <!-- roles -->
-          <li class="menu-item <?php echo request()->is('roles') ? 'active' : ''; ?>">
-            <a href="<?php echo url('roles'); ?>" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Role</div>
-            </a>
-          </li>
+          <?php if (checkPermission($userRolePermissions, 'role_module')) { ?>
+            <li class="menu-item <?php echo request()->is('roles') ? 'active' : ''; ?>">
+              <a href="<?php echo url('roles'); ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Role</div>
+              </a>
+            </li>
+          <?php } ?>
 
           <!-- users -->
-          <li class="menu-item <?php echo request()->is('users') ? 'active' : ''; ?>">
-            <a href="<?php echo url('users'); ?>" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-collection"></i>
-              <div data-i18n="Basic">Users</div>
-            </a>
-          </li>
+          <?php if (checkPermission($userRolePermissions, 'user_module')) { ?>
+            <li class="menu-item <?php echo request()->is('users') ? 'active' : ''; ?>">
+              <a href="<?php echo url('users'); ?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Users</div>
+              </a>
+            </li>
+          <?php } ?>
 
           <!-- hrm -->
-          <li class="menu-item <?php echo request()->is('employees*', 'designations', 'attendances', 'holidays', 'leaves') ? 'active open' : ''; ?>">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-layout"></i>
-              <div data-i18n="Layouts">HRM</div>
-            </a>
+          <?php if (checkPermission($userRolePermissions, 'employee_module') || checkPermission($userRolePermissions, 'designation_module') || checkPermission($userRolePermissions, 'attendance_module') || checkPermission($userRolePermissions, 'holiday_module') || checkPermission($userRolePermissions, 'leave_request_module') || checkPermission($userRolePermissions, 'payroll_module')) { ?>
 
-            <ul class="menu-sub">
-              <li class="menu-item <?php echo request()->is('employees') ? 'active' : ''; ?>">
-                <a href="<?php echo url('employees'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Employees</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('designations') ? 'active' : ''; ?>">
-                <a href="<?php echo url('designations'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Designations</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('attendances') ? 'active' : ''; ?>">
-                <a href="<?php echo url('attendances'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Attendance</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('holidays') ? 'active' : ''; ?>">
-                <a href="<?php echo url('holidays'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Holidays</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('leaves') ? 'active' : ''; ?>">
-                <a href="<?php echo url('leaves'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Leave Request</div>
-                </a>
-              </li>
-              <li class="menu-item <?php echo request()->is('payrolls') ? 'active' : ''; ?>">
-                <a href="<?php echo url('payrolls'); ?>" class="menu-link">
-                  <div data-i18n="Without menu">Payroll</div>
-                </a>
-              </li>
-            </ul>
-          </li>
+            <li class="menu-item <?php echo request()->is('employees*', 'designations', 'attendances', 'holidays', 'leaves') ? 'active open' : ''; ?>">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Layouts">HRM</div>
+              </a>
+
+              <ul class="menu-sub">
+
+                <?php if (checkPermission($userRolePermissions, 'employee_module')) { ?>
+                  <li class="menu-item <?php echo request()->is('employees') ? 'active' : ''; ?>">
+                    <a href="<?php echo url('employees'); ?>" class="menu-link">
+                      <div data-i18n="Without menu">Employees</div>
+                    </a>
+                  </li>
+                <?php } ?>
+
+                <?php if (checkPermission($userRolePermissions, 'designation_module')) { ?>
+                  <li class="menu-item <?php echo request()->is('designations') ? 'active' : ''; ?>">
+                    <a href="<?php echo url('designations'); ?>" class="menu-link">
+                      <div data-i18n="Without menu">Designations</div>
+                    </a>
+                  </li>
+                <?php } ?>
+
+                <?php if (checkPermission($userRolePermissions, 'attendance_module')) { ?>
+                  <li class="menu-item <?php echo request()->is('attendances') ? 'active' : ''; ?>">
+                    <a href="<?php echo url('attendances'); ?>" class="menu-link">
+                      <div data-i18n="Without menu">Attendance</div>
+                    </a>
+                  </li>
+                <?php } ?>
+
+                <?php if (checkPermission($userRolePermissions, 'holiday_module')) { ?>
+                  <li class="menu-item <?php echo request()->is('holidays') ? 'active' : ''; ?>">
+                    <a href="<?php echo url('holidays'); ?>" class="menu-link">
+                      <div data-i18n="Without menu">Holidays</div>
+                    </a>
+                  </li>
+                <?php } ?>
+
+                <?php if (checkPermission($userRolePermissions, 'leave_request_module')) { ?>
+                  <li class="menu-item <?php echo request()->is('leaves') ? 'active' : ''; ?>">
+                    <a href="<?php echo url('leaves'); ?>" class="menu-link">
+                      <div data-i18n="Without menu">Leave Request</div>
+                    </a>
+                  </li>
+                <?php } ?>
+
+                <?php if (checkPermission($userRolePermissions, 'payroll_module')) { ?>
+                  <li class="menu-item <?php echo request()->is('payrolls') ? 'active' : ''; ?>">
+                    <a href="<?php echo url('payrolls'); ?>" class="menu-link">
+                      <div data-i18n="Without menu">Payroll</div>
+                    </a>
+                  </li>
+                <?php } ?>
+              </ul>
+            </li>
+          <?php } ?>
 
           <!-- products -->
           <li class="menu-item <?php echo request()->is('products') ? 'active' : ''; ?>">
@@ -201,12 +226,14 @@
           </li>
 
           <!-- production -->
+          <?php if (checkPermission($userRolePermissions, 'customer_module')) { ?>
           <li class="menu-item <?php echo request()->is('customers') ? 'active' : ''; ?>">
             <a href="<?php echo url('customers'); ?>" class="menu-link">
               <i class="menu-icon tf-icons bx bx-collection"></i>
               <div data-i18n="Basic">Customers</div>
             </a>
           </li>
+          <?php } ?>
 
 
           <li class="menu-item <?php echo request()->is('employees*', 'designations', 'attendances', 'holidays', 'leaves') ? 'active open' : ''; ?>">
