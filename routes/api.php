@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\AdminPortal\Inventory\CustomerController;
+use App\Http\Controllers\Api\Customer\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/auth-login', [AuthController::class, 'authLogin'])->name('auth-login');
+Route::post('/auth-login', [AuthController::class, 'authLogin'])->name('auth-login');
 
-Route::middleware('auth::sanctum')->group(function () {
-    Route::get('/', [CustomerController::class, 'users']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/fetch-customers', [CustomerController::class, 'fetchCustomers'])->name('fetch-customers');
 });
