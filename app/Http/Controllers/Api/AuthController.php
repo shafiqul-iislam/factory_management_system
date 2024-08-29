@@ -10,11 +10,11 @@ class AuthController extends Controller
 {
     public function authLogin(Request $request)
     {
-        // $credentials = $request->only('email', 'password');
+        $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('web')->attempt($request->only(['email', 'password']))) {
+        if (Auth::guard()->attempt($credentials)) {
 
-            $user = Auth::guard('web')->user();
+            $user = Auth::guard()->user();
             $tokenResult = $user->createToken('create_token');
             $token = $tokenResult->plainTextToken;
 

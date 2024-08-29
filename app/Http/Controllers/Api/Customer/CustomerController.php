@@ -8,13 +8,32 @@ use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
 {
+    // token based api
     public function fetchCustomers(Request $request)
     {
-        $customers = Customer::all();
+        $customers = Customer::with(['userData']);
 
+        if ($request->has(['offset', 'limit'])) {
+            $offset = $request->query('offset');
+            $limit = $request->query('limit');
+
+            $customers->offset($offset)->limit($limit);
+        }
+
+        $customersList = $customers->get();
 
         return response()->json([
-            'customers' => $customers
+            'customersList' => $customersList
+        ], 200);
+    }
+
+
+    public function customerProfileDetails(Request $request)
+    {
+        $customerData = Customer::findOrFail($request->id);
+
+        return response()->json([
+            'customerDetails' => $customerData
         ], 200);
     }
 }
