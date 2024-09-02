@@ -19,6 +19,7 @@ use App\Http\Controllers\AdminPortal\Inventory\WarehouseController;
 use App\Http\Controllers\AdminPortal\Department\DepartmentController;
 use App\Http\Controllers\AdminPortal\Production\ProductionController;
 use App\Http\Controllers\AdminPortal\Inventory\StockAdjustmentController;
+use App\Http\Controllers\AdminPortal\Settings\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -251,6 +252,15 @@ Route::middleware(['auth'])
         Route::post('/update', [StockAdjustmentController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [StockAdjustmentController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [StockAdjustmentController::class, 'serverSideAllStocks'])->name('server-side-data');
+    });
+
+
+Route::middleware(['auth'])
+    ->prefix('settings')
+    ->name('settings.')
+    ->group(function () {
+        Route::get('/', [SettingsController::class, 'index'])->name('settings');
+        Route::post('/update-general-settings', [SettingsController::class, 'updateGeneralSettings'])->name('update-general-settings');
     });
 
 
