@@ -261,6 +261,8 @@ Route::middleware(['auth'])
     ->group(function () {
         Route::get('/', [SettingsController::class, 'index'])->name('settings');
         Route::post('/update-general-settings', [SettingsController::class, 'updateGeneralSettings'])->name('update-general-settings');
+
+        Route::post('/upload-logo', [SettingsController::class, 'uploadLogo'])->name('upload-logo');
     });
 
 
