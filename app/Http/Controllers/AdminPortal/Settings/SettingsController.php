@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminPortal\Settings;
 use Illuminate\Http\Request;
 use App\Settings\GeneralSettings;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
 
 class SettingsController extends Controller
@@ -54,15 +55,26 @@ class SettingsController extends Controller
             return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        // ########### interinvention image upload #########
+        // ########### interinvention image upload #########        
+        $logo = $request->file('logo');
+        $logo = time() . '.' . $logo->getClientOriginalExtension();
+
+        $logoResize = Image::make($logo)->resize(100, 70, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+
+        // Define the path where you want to store the image
+        $path = public_path('/logo' . $logo);
+        $logoResize->save($path);
+
 
 
         // ############# normal image upload ########
-
         // $imageName = time() . '.' . $request->logo->extension();
         // $request->logo->storeAs('/logo', $imageName);
 
-        $generalSettings->logo = $imageName;
+        $generalSettings->logo = $logo;
         $generalSettings->save();
         return redirect()->back()->with('success', 'Logo Updated Successfully');
     }
