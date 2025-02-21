@@ -9,8 +9,9 @@ export default defineConfig({
                 'resources/js/app.js',
             ],
             refresh: [
-                ...refreshPaths,
-                'app/Livewire/**',
+                true,
+                // ...refreshPaths,
+                // 'app/Livewire/**',
             ],
         }),
     ],

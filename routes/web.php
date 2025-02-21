@@ -3,6 +3,7 @@
 use App\Models\Designation;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPortal\UserController;
+use App\Http\Controllers\AdminPortal\Sms\SmsController;
 use App\Http\Controllers\AdminPortal\Role\RoleController;
 use App\Http\Controllers\AdminPortal\HRM\HolidayController;
 use App\Http\Controllers\AdminPortal\HRM\PayrollController;
@@ -14,12 +15,12 @@ use App\Http\Controllers\CustomerPortal\CustomerAuthController;
 use App\Http\Controllers\CustomerPortal\CustomerHomeController;
 use App\Http\Controllers\AdminPortal\HRM\LeaveRequestController;
 use App\Http\Controllers\AdminPortal\Product\ProductsController;
+use App\Http\Controllers\AdminPortal\Settings\SettingsController;
 use App\Http\Controllers\AdminPortal\Inventory\CustomerController;
 use App\Http\Controllers\AdminPortal\Inventory\WarehouseController;
 use App\Http\Controllers\AdminPortal\Department\DepartmentController;
 use App\Http\Controllers\AdminPortal\Production\ProductionController;
 use App\Http\Controllers\AdminPortal\Inventory\StockAdjustmentController;
-use App\Http\Controllers\AdminPortal\Settings\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,7 +76,7 @@ Route::middleware(['auth', 'permission:user_module'])
         Route::post('/server-side-users', [UserController::class, 'serverSideAllUsers'])->name('server-side-users');
     });
 
-Route::middleware(['auth', 'permission:role_module'])
+Route::middleware(['auth'])
     ->prefix('roles')
     ->name('roles.')
     ->group(function () {
@@ -254,6 +255,19 @@ Route::middleware(['auth'])
         Route::post('/server-side-data', [StockAdjustmentController::class, 'serverSideAllStocks'])->name('server-side-data');
     });
 
+
+// stock adjustment
+Route::middleware(['auth'])
+    ->prefix('sms-templates')
+    ->name('sms-templates.')
+    ->group(function () {
+        Route::get('/', [SmsController::class, 'index'])->name('all');
+        // Route::post('/add', [StockAdjustmentController::class, 'add'])->name('add');
+        // Route::get('/edit/{id}', [StockAdjustmentController::class, 'edit'])->name('edit');
+        // Route::post('/update', [StockAdjustmentController::class, 'update'])->name('update');
+        // Route::delete('/delete/{id}', [StockAdjustmentController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [StockAdjustmentController::class, 'serverSideAllStocks'])->name('server-side-data');
+    });
 
 Route::middleware(['auth'])
     ->prefix('settings')
