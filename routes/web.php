@@ -267,6 +267,9 @@ Route::middleware(['auth'])
         // Route::post('/update', [StockAdjustmentController::class, 'update'])->name('update');
         // Route::delete('/delete/{id}', [StockAdjustmentController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [StockAdjustmentController::class, 'serverSideAllStocks'])->name('server-side-data');
+
+        Route::post('/send-sms', [SmsController::class, 'sendCustomSms'])->name('send-sms');
+
     });
 
 Route::middleware(['auth'])
