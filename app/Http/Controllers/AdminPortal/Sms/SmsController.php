@@ -21,6 +21,8 @@ class SmsController extends Controller
             'message' => 'Test Message From Laravel',
         ];
 
-        $smsResponse = SendSms::dispatch($smsData)->delay(1);
+        $smsResponse = dispatch(new SendSms($smsData))->delay(now()->addSeconds(30));
+
+        return back()->with('success', 'SMS sent successfully.');
     }
 }

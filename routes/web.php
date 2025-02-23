@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPortal\UserController;
 use App\Http\Controllers\AdminPortal\Sms\SmsController;
 use App\Http\Controllers\AdminPortal\Role\RoleController;
+use App\Http\Controllers\AdminPortal\Email\EmailController;
 use App\Http\Controllers\AdminPortal\HRM\HolidayController;
 use App\Http\Controllers\AdminPortal\HRM\PayrollController;
 use App\Http\Controllers\AdminPortal\HRM\EmployeeController;
@@ -256,7 +257,7 @@ Route::middleware(['auth'])
     });
 
 
-// stock adjustment
+// sms templates
 Route::middleware(['auth'])
     ->prefix('sms-templates')
     ->name('sms-templates.')
@@ -269,7 +270,21 @@ Route::middleware(['auth'])
         Route::post('/server-side-data', [StockAdjustmentController::class, 'serverSideAllStocks'])->name('server-side-data');
 
         Route::post('/send-sms', [SmsController::class, 'sendCustomSms'])->name('send-sms');
+    });
 
+// email templates
+Route::middleware(['auth'])
+    ->prefix('email-templates')
+    ->name('email-templates.')
+    ->group(function () {
+        Route::get('/', [EmailController::class, 'index'])->name('all');
+        // Route::post('/add', [EmailController::class, 'add'])->name('add');
+        // Route::get('/edit/{id}', [EmailController::class, 'edit'])->name('edit');
+        // Route::post('/update', [EmailController::class, 'update'])->name('update');
+        // Route::delete('/delete/{id}', [EmailController::class, 'delete'])->name('delete');
+        Route::post('/server-side-data', [EmailController::class, 'serverSideAllEmails'])->name('server-side-data');
+
+        Route::get('/send-email', [EmailController::class, 'sendCustomEmail'])->name('send-email');
     });
 
 Route::middleware(['auth'])
