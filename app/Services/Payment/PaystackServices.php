@@ -15,7 +15,7 @@ class PaystackServices
             'callback_url' => url('customer-portal/paystack-success'),
         ];
 
-        $secretKey = 'sk_test_e44613587cfbbbc43c436b90ae96949dd89b4903';
+        $secretKey = 'sk_test_e4461';
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
