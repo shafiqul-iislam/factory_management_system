@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Designation;
+use App\Models\Customer\Customer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPortal\UserController;
 use App\Http\Controllers\AdminPortal\Sms\SmsController;
@@ -22,6 +23,9 @@ use App\Http\Controllers\AdminPortal\Inventory\WarehouseController;
 use App\Http\Controllers\AdminPortal\Department\DepartmentController;
 use App\Http\Controllers\AdminPortal\Production\ProductionController;
 use App\Http\Controllers\AdminPortal\Inventory\StockAdjustmentController;
+
+use App\Http\Controllers\CustomerPortal\PaymentController as CustomerPaymentController;
+use App\Http\Controllers\CustomerPortal\Gateways\PaystackController as CustomerPaystackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -325,4 +329,9 @@ Route::middleware(['auth:customer'])->prefix('customer-portal')
     ->name('customer-portal.')
     ->group(function () {
         Route::get('/home', [CustomerHomeController::class, 'index'])->name('home');
+
+        
     });
+    
+    Route::get('/payment', [CustomerPaymentController::class, 'payment'])->name('payment');
+    Route::post('/paystack-success', [CustomerPaystackController::class, 'success'])->name('paystack-success');
