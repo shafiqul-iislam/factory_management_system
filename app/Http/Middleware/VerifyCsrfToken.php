@@ -15,5 +15,7 @@ class VerifyCsrfToken extends Middleware
         //
 
         'customer-portal/paystack-success',
+
+        'sslcommerz-success',
     ];
 }

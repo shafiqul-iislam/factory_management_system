@@ -26,6 +26,7 @@ use App\Http\Controllers\AdminPortal\Inventory\StockAdjustmentController;
 
 use App\Http\Controllers\CustomerPortal\PaymentController as CustomerPaymentController;
 use App\Http\Controllers\CustomerPortal\Gateways\PaystackController as CustomerPaystackController;
+use App\Http\Controllers\CustomerPortal\Gateways\SSLCommerzController;
 
 /*
 |--------------------------------------------------------------------------
@@ -329,9 +330,11 @@ Route::middleware(['auth:customer'])->prefix('customer-portal')
     ->name('customer-portal.')
     ->group(function () {
         Route::get('/home', [CustomerHomeController::class, 'index'])->name('home');
-
-        
     });
-    
-    Route::get('/payment', [CustomerPaymentController::class, 'payment'])->name('payment');
-    Route::post('/paystack-success', [CustomerPaystackController::class, 'success'])->name('paystack-success');
+
+Route::get('/payment', [CustomerPaymentController::class, 'payment'])->name('payment');
+Route::get('/paystack-success', [CustomerPaystackController::class, 'success'])->name('paystack-success');
+
+Route::post('/sslcommerz-success', [SSLCommerzController::class, 'success'])->name('sslcommerz-success');
+Route::post('/sslcommerz-failed', [SSLCommerzController::class, 'failed'])->name('sslcommerz-failed');
+Route::post('/sslcommerz-cancel', [SSLCommerzController::class, 'cancel'])->name('sslcommerz-cancel');

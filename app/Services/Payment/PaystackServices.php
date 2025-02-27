@@ -7,15 +7,15 @@ class PaystackServices
 
     public function processPayment($paymentData)
     {
-
         $url = "https://api.paystack.co/transaction/initialize";
         $details = [
             'email' => $paymentData['customer_email'],
             'amount' => $paymentData['amount'] * 100, // Convert to kobo
-            'callback_url' => url('customer-portal/paystack-success'),
+            // 'callback_url' => url('customer-portal/paystack-success'),
+            'callback_url' => url('paystack-success'),
         ];
 
-        $secretKey = 'sk_test_e4461';
+        $secretKey = 'sk_test_e44613587cfbbbc4';
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
