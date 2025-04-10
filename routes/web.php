@@ -5,6 +5,7 @@ use App\Models\Customer\Customer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminPortal\UserController;
 use App\Http\Controllers\AdminPortal\Sms\SmsController;
+use App\Http\Controllers\AdminPortal\Chat\ChatController;
 use App\Http\Controllers\AdminPortal\Role\RoleController;
 use App\Http\Controllers\AdminPortal\Email\EmailController;
 use App\Http\Controllers\AdminPortal\HRM\HolidayController;
@@ -22,11 +23,11 @@ use App\Http\Controllers\AdminPortal\Inventory\CustomerController;
 use App\Http\Controllers\AdminPortal\Inventory\WarehouseController;
 use App\Http\Controllers\AdminPortal\Department\DepartmentController;
 use App\Http\Controllers\AdminPortal\Production\ProductionController;
-use App\Http\Controllers\AdminPortal\Inventory\StockAdjustmentController;
 
+use App\Http\Controllers\CustomerPortal\Gateways\SSLCommerzController;
+use App\Http\Controllers\AdminPortal\Inventory\StockAdjustmentController;
 use App\Http\Controllers\CustomerPortal\PaymentController as CustomerPaymentController;
 use App\Http\Controllers\CustomerPortal\Gateways\PaystackController as CustomerPaystackController;
-use App\Http\Controllers\CustomerPortal\Gateways\SSLCommerzController;
 
 /*
 |--------------------------------------------------------------------------
@@ -303,6 +304,13 @@ Route::middleware(['auth'])
     });
 
 
+Route::middleware(['auth'])
+    ->prefix('real-time-chat')
+    ->name('real-time-chat.')
+    ->group(function () {
+        Route::get('/', [ChatController::class, 'index'])->name('index');
+        Route::post('/send-message', [ChatController::class, 'sendMessage'])->name('send-message');
+    });
 
 
 // ############# need to add balance module ##############

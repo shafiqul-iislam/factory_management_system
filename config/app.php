@@ -174,7 +174,9 @@ return [
 
         Spatie\Permission\PermissionServiceProvider::class,
 
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+
+        Illuminate\Broadcasting\BroadcastServiceProvider::class,
     ])->toArray(),
 
     /*
