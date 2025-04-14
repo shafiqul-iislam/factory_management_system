@@ -52,6 +52,7 @@ class EmailController extends Controller
 
 
         $details = [
+            'toEmail' => 'john@site.com',
             'name' => 'John Doe',
             'message' => 'This is a test email from Laravel.'
         ];

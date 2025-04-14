@@ -44,11 +44,13 @@ class SendEmail implements ShouldQueue
         Config::set('mail', $config);
 
 
+        $toEmail = $this->details['toEmail'];
+
         $emailDetails = [
             'name' => $this->details['name'],
             'message' => $this->details['message'],
         ];
 
-        Mail::to('shafiq@gmail.com')->send(new SendingMail($emailDetails));
+        Mail::to($toEmail)->send(new SendingMail($emailDetails));
     }
 }
