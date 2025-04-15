@@ -7,27 +7,14 @@ use Illuminate\Console\Command;
 
 class CustomerDueNotification extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'app:customer-due-notification';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Command description';
+    protected $signature = 'command:customer-due-notification';
 
-    /**
-     * Execute the console command.
-     */
+    protected $description = 'Successfully sent customer due notification';
+
+
     public function handle(CustomerServices $customerServices)
     {
-        //
-
-        $dueCustomers = $customerServices->customerDueNotificationAlert();
+        $customerServices->customerDueNotificationAlert();
     }
 }

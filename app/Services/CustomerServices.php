@@ -17,16 +17,16 @@ class CustomerServices
 
         foreach ($customerData as $customer) {
 
-            if ($customer->due_amount > 0) {
+            // if ($customer->due_amount > 0) {
 
                 $details = [
                     'toEmail' => $customer->email,
-                    'name' => $$customer->name,
+                    'name' => $customer->name,
                     'message' => 'Dear Customer You Need to Pay Your Due Amount Very Soon'
                 ];
 
                 dispatch(new SendEmail($details))->delay(now()->addMinutes(1));
-            }
+            // }
         }
     }
 }
