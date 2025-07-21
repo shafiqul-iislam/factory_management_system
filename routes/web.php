@@ -71,7 +71,7 @@ Route::middleware(['auth'])->group(function () {
 // });
 
 
-Route::middleware(['auth', 'permission:user_module'])
+Route::middleware(['auth'])
     ->prefix('users')
     ->name('users.')
     ->group(function () {
