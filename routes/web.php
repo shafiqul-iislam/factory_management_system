@@ -89,7 +89,7 @@ Route::middleware(['auth'])
     ->group(function () {
         Route::get('/', [RoleController::class, 'index'])->name('all');
         Route::post('/add', [RoleController::class, 'add'])->name('add');
-        Route::post('/update', [RoleController::class, 'update'])->name('update');
+        Route::put('/update', [RoleController::class, 'update'])->name('update');
         Route::delete('/delete/{id}', [RoleController::class, 'delete'])->name('delete');
         Route::post('/server-side-data', [RoleController::class, 'serverSideAllRoles'])->name('server-side-data');
 

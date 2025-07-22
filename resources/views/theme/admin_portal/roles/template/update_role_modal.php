@@ -1,4 +1,5 @@
-<form action="<?php echo url('roles/update'); ?>" method="POST">
+<form action="<?php echo url('roles/update'); ?>" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="PUT">
     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" />
 
     <div class="modal fade update_role_modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
