@@ -47,21 +47,7 @@ class RolesControllerTest extends TestCase
 
     public function test_login_user_can_view_roles(): void
     {
-        // create user       
-        $user = User::factory()->create([
-            'password' => Hash::make('password123'),
-        ]);
-
-        // login user
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password123',
-        ]);
-
-        // $response->assertRedirect('/home'); // or wherever you redirect after login
-
-        $this->assertAuthenticated(); // ✅ Correct: called on $this
-        $this->assertAuthenticatedAs($user);
+        $this->setUp(); // user login
 
 
         // create role
@@ -75,21 +61,7 @@ class RolesControllerTest extends TestCase
 
     public function test_logged_in_user_can_update_roles(): void
     {
-        // create user       
-        $user = User::factory()->create([
-            'password' => Hash::make('password123'),
-        ]);
-
-        // login user
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password123',
-        ]);
-
-        // $response->assertRedirect('/home'); // or wherever you redirect after login
-
-        $this->assertAuthenticated(); // ✅ Correct: called on $this
-        $this->assertAuthenticatedAs($user);
+        $this->setUp(); // user login
 
         // create role
         $response = $this->from(url('/roles'))
@@ -110,5 +82,26 @@ class RolesControllerTest extends TestCase
         // $roleUpdate = Role::where('name', 'staff-4-update')->first();
 
         // $this->assertEquals('staff-4-update', $roleUpdate->name);
+    }
+
+    public function test_logged_in_user_can_delete_roles(): void
+    {
+        $this->setUp(); // user login
+
+        // create role
+        $response = $this->from(url('/roles'))
+            ->post('/roles/add', [
+                'name' => 'staff-5 ',
+                'guard_name' => 'sanctum',
+            ]);
+
+
+        $role = Role::where('name', 'staff-5')->first();
+
+        $response = $this->from(url('/roles'))
+            ->delete('/roles/delete', ['id' => $role->id]);
+
+        // validate
+        $this->assertEquals(0, Role::where('name', 'staff-5')->count());
     }
 }
