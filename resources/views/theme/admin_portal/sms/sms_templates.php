@@ -14,15 +14,13 @@
     </div>
     <div class="card-body py-4">
         <div class="table-responsive">
-            <table class="table align-items-center mb-0" id="dt_users">
+            <table class="table align-items-center mb-0" id="dt_sms_templates">
                 <thead>
                     <tr class="text-start fs-6">
                         <th class="font-weight-bolder" style="min-width: 20px;">ID</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Username</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Role</th>
-                        <th class="font-weight-bolder" style="min-width: 150px;">Profile Type</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Phone</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Email</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Name</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Type</th>
+                        <th class="font-weight-bolder" style="min-width: 100px;">Template</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Status</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Created By</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Created At</th>
@@ -39,3 +37,48 @@
 
 <?php include(resource_path('/views/theme/admin_portal/dashboard/footer.php')) ?>
 <?php include(resource_path('/views/theme/admin_portal/sms/templates/send_custom_sms_modal.php')) ?>
+
+
+<script>
+    $(document).ready(function() {
+        var url = "<?php echo url('sms-templates/server-side-data'); ?>";
+
+        var table = $('#dt_sms_templates').DataTable({
+            serverSide: true,
+            processing: true,
+            orderable: false,
+            scrollX: true,
+            searching: false,
+            ajax: {
+                url: url,
+                type: "POST",
+                data: {
+                    "_token": "<?php echo csrf_token(); ?>"
+                },
+            },
+            error: function() {
+                console.log(error);
+            }
+        });
+
+        table.on('click', '.remove', function(e) {
+
+            e.preventDefault();
+            var deleteData = $(this).parent('form');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function(actionType) {
+                if (actionType.value == true) {
+                    deleteData.submit();
+                }
+            });
+        });
+    });
+</script>

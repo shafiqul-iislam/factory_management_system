@@ -26,6 +26,7 @@ use App\Http\Controllers\AdminPortal\Production\ProductionController;
 
 use App\Http\Controllers\CustomerPortal\Gateways\SSLCommerzController;
 use App\Http\Controllers\AdminPortal\Inventory\StockAdjustmentController;
+use App\Http\Controllers\AdminPortal\Sms\SmsTemplateController;
 use App\Http\Controllers\CustomerPortal\PaymentController as CustomerPaymentController;
 use App\Http\Controllers\CustomerPortal\Gateways\PaystackController as CustomerPaystackController;
 
@@ -268,14 +269,14 @@ Route::middleware(['auth'])
     ->prefix('sms-templates')
     ->name('sms-templates.')
     ->group(function () {
-        Route::get('/', [SmsController::class, 'index'])->name('all');
+        Route::get('/', [SmsTemplateController::class, 'index'])->name('all');
         // Route::post('/add', [StockAdjustmentController::class, 'add'])->name('add');
         // Route::get('/edit/{id}', [StockAdjustmentController::class, 'edit'])->name('edit');
         // Route::post('/update', [StockAdjustmentController::class, 'update'])->name('update');
         // Route::delete('/delete/{id}', [StockAdjustmentController::class, 'delete'])->name('delete');
-        Route::post('/server-side-data', [StockAdjustmentController::class, 'serverSideAllStocks'])->name('server-side-data');
+        Route::post('/server-side-data', [SmsTemplateController::class, 'serverSideAllSmsTemplates'])->name('server-side-data');
 
-        Route::post('/send-sms', [SmsController::class, 'sendCustomSms'])->name('send-sms');
+        Route::post('/send-sms', [SmsTemplateController::class, 'sendCustomSms'])->name('send-sms');
     });
 
 // email templates
