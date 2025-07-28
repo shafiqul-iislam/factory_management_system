@@ -6,23 +6,72 @@ use App\Jobs\SendSms;
 use Illuminate\Http\Request;
 use App\Models\SMS\SmsTemplate;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use App\Services\Notification\Sms\SmsServices;
 
 class SmsTemplateController extends Controller
 {
+    public function __construct(
+        private SmsServices $smsServices
+    ) {}
     public function index()
     {
         return view('theme.admin_portal.sms.sms_templates');
     }
 
 
-    public function sendCustomSms()
+    public function createSmsTemplate(Request $request)
     {
-        $smsData = [
-            'phone' => '01317397129',
-            'message' => 'Test Message From Laravel',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:30',
+            'type' => 'required',
+            'template' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            return redirect()->back()->with('error', $error);
+        } else {
+
+            $smsTemplate = new SmsTemplate;
+            $smsTemplate->status = ($request->status == 'on') ? 1 : 0;
+            $smsTemplate->name = $request->name;
+            $smsTemplate->type = $request->type;
+            $smsTemplate->template_text = $request->template;
+
+            $loginUserData = auth()->user();
+            $smsTemplate->created_by_id = $loginUserData->id;
+            $smsTemplate->created_by_username = $loginUserData->name;
+            $response = $smsTemplate->save();
+
+            if ($response) {
+                return redirect()->back()->with('success', 'Successfuly Created Template');
+            } else {
+                return redirect()->back()->with('error', 'Oops! Something Went Wrong');
+            }
+        }
+    }
+
+
+    public function sendCustomSms(Request $request)
+    {
+        $message = 'Test Message From Laravel';
+
+        if (isset($request->template)) {
+            $authUser = auth()->user();
+            $smsData = [
+                'otp' => '1234',
+            ];
+
+            $message = $this->smsServices->processSmsTemplate($request->template, $authUser, $smsData);
+        }
+
+        $smsDetails = [
+            'phone' => $request->phone,
+            'message' => $message
         ];
 
-        $smsResponse = dispatch(new SendSms($smsData))->delay(now()->addSeconds(30));
+        $smsResponse = dispatch(new SendSms($smsDetails))->delay(now()->addSeconds(30));
 
         return back()->with('success', 'SMS sent successfully.');
     }

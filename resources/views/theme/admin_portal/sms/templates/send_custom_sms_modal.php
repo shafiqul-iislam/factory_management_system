@@ -24,6 +24,18 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="form-label fs-7">Templates</label>
+                                <select name="template" class="form-control form-control-md">
+                                    <option value="">Select Template</option>
+                                    <option value="customer_due_message">Customer Due</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>

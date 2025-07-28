@@ -7,9 +7,14 @@
     <div class="card-header border-bottom d-flex align-items-center justify-content-between">
         <h4 class="card-title">SMS Templates</h4>
         <div class="card-toolbar">
-            <button type="button" class="btn btn-primary btn-md me-3 fs-6" data-bs-toggle="modal" data-bs-target=".send_custom_sms_modal">
+            <button type="button" class="btn btn-primary btn-md me-2 fs-6" data-bs-toggle="modal" data-bs-target=".send_custom_sms_modal">
                 Send Custom SMS
             </button>
+
+            <button type="button" class="btn btn-primary btn-md fs-6" data-bs-toggle="modal" data-bs-target=".create_sms_template_modal">
+                Create Template
+            </button>
+
         </div>
     </div>
     <div class="card-body py-4">
@@ -20,7 +25,7 @@
                         <th class="font-weight-bolder" style="min-width: 20px;">ID</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Name</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Type</th>
-                        <th class="font-weight-bolder" style="min-width: 100px;">Template</th>
+                        <th class="font-weight-bolder" style="min-width: 200px;">Template</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Status</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Created By</th>
                         <th class="font-weight-bolder" style="min-width: 100px;">Created At</th>
@@ -37,6 +42,7 @@
 
 <?php include(resource_path('/views/theme/admin_portal/dashboard/footer.php')) ?>
 <?php include(resource_path('/views/theme/admin_portal/sms/templates/send_custom_sms_modal.php')) ?>
+<?php include(resource_path('/views/theme/admin_portal/sms/templates/create_sms_template_modal.php')) ?>
 
 
 <script>

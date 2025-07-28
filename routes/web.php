@@ -270,7 +270,7 @@ Route::middleware(['auth'])
     ->name('sms-templates.')
     ->group(function () {
         Route::get('/', [SmsTemplateController::class, 'index'])->name('all');
-        // Route::post('/add', [StockAdjustmentController::class, 'add'])->name('add');
+        Route::post('/create-template', [SmsTemplateController::class, 'createSmsTemplate'])->name('create-template');
         // Route::get('/edit/{id}', [StockAdjustmentController::class, 'edit'])->name('edit');
         // Route::post('/update', [StockAdjustmentController::class, 'update'])->name('update');
         // Route::delete('/delete/{id}', [StockAdjustmentController::class, 'delete'])->name('delete');
