@@ -118,7 +118,7 @@ class UserController extends Controller
             0 => 'id',
         );
 
-        $query = User::orderBy($columns[$request->input('order.0.column')], $request->input('order.0.dir'));
+        $query = User::with(['roles'])->orderBy($columns[$request->input('order.0.column')], $request->input('order.0.dir'));
 
         $totalRecords = $query->count();
         $totalFiltered = $totalRecords;
@@ -143,8 +143,8 @@ class UserController extends Controller
 
                 $td = [];
                 $td[] = $user->id;
-                $td[] = $user->username;
-                $td[] = $user->role;
+                $td[] = $user->name;
+                $td[] = $user->roles?->name ?? '';
                 $td[] = $user->profile_type;
                 $td[] = $user->phone;
                 $td[] = $user->email;
